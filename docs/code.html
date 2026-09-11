@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Simulator – HEMT Monte Carlo Simulation</title>
+<title>Code – HEMT Monte Carlo Simulation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -100,11 +100,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./simulator.html" aria-current="page"> 
+    <a class="nav-link" href="./simulator.html"> 
 <span class="menu-text">Simulator</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./code.html"> 
+    <a class="nav-link active" href="./code.html" aria-current="page"> 
 <span class="menu-text">Code</span></a>
   </li>  
 </ul>
@@ -124,15 +124,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#device-structure" id="toc-device-structure" class="nav-link" data-scroll-target="#device-structure">Device Structure</a></li>
-  <li><a href="#simulation-domain-and-mesh" id="toc-simulation-domain-and-mesh" class="nav-link" data-scroll-target="#simulation-domain-and-mesh">Simulation Domain and Mesh</a></li>
-  <li><a href="#superparticles" id="toc-superparticles" class="nav-link" data-scroll-target="#superparticles">Superparticles</a></li>
-  <li><a href="#carrier-transport" id="toc-carrier-transport" class="nav-link" data-scroll-target="#carrier-transport">Carrier Transport</a></li>
-  <li><a href="#poisson-equation" id="toc-poisson-equation" class="nav-link" data-scroll-target="#poisson-equation">Poisson Equation</a></li>
-  <li><a href="#scattering-mechanisms" id="toc-scattering-mechanisms" class="nav-link" data-scroll-target="#scattering-mechanisms">Scattering Mechanisms</a></li>
-  <li><a href="#interfaces-and-boundaries" id="toc-interfaces-and-boundaries" class="nav-link" data-scroll-target="#interfaces-and-boundaries">Interfaces and Boundaries</a></li>
-  <li><a href="#self-heating" id="toc-self-heating" class="nav-link" data-scroll-target="#self-heating">Self-Heating</a></li>
-  <li><a href="#simulation-flow" id="toc-simulation-flow" class="nav-link" data-scroll-target="#simulation-flow">Simulation Flow</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
+  <li><a href="#program-structure" id="toc-program-structure" class="nav-link" data-scroll-target="#program-structure">Program Structure</a></li>
+  <li><a href="#main-simulation-loop" id="toc-main-simulation-loop" class="nav-link" data-scroll-target="#main-simulation-loop">Main Simulation Loop</a></li>
   </ul>
 </nav>
     </div>
@@ -141,8 +135,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simulator</h1>
-<p class="subtitle lead">HEMT Monte Carlo 시뮬레이터의 물리 모델과 계산 방법</p>
+<h1 class="title">Code</h1>
+<p class="subtitle lead">시뮬레이터의 프로그램 구조와 구현 방법</p>
 </div>
 
 
@@ -161,51 +155,40 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>이 페이지에서는 HEMT Monte Carlo 시뮬레이터가 어떤 소자를 대상으로 하며, 캐리어 수송과 전기장을 어떤 방법으로 계산하는지 설명합니다.</p>
+<p>이 페이지에서는 HEMT Monte Carlo 시뮬레이터의 전체 프로그램 구조와 주요 계산 단계의 역할을 설명합니다.</p>
+<p>전체 소스 코드를 공개하기보다는 계산 흐름, 주요 입력값, 의사코드 및 성능 개선 과정을 중심으로 정리합니다.</p>
 </section>
-<section id="device-structure" class="level2">
-<h2 class="anchored" data-anchor-id="device-structure">Device Structure</h2>
+<section id="development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
 <ul>
-<li>p-GaN gate</li>
-<li>AlGaN barrier</li>
-<li>AlN spacer</li>
-<li>GaN channel</li>
-<li>Carbon-doped GaN</li>
-<li>GaN buffer</li>
-<li>Source, gate and drain contacts</li>
+<li>Python</li>
+<li>Jupyter Notebook</li>
+<li>NumPy</li>
+<li>SciPy</li>
+<li>Matplotlib</li>
+<li>Numba</li>
 </ul>
 </section>
-<section id="simulation-domain-and-mesh" class="level2">
-<h2 class="anchored" data-anchor-id="simulation-domain-and-mesh">Simulation Domain and Mesh</h2>
-<p>계산 영역은 x–z 방향의 2차원 공간으로 구성합니다. 캐리어의 속도는 x, y, z 방향의 3성분을 사용합니다.</p>
+<section id="program-structure" class="level2">
+<h2 class="anchored" data-anchor-id="program-structure">Program Structure</h2>
+<p>시뮬레이터는 대략 다음 순서로 실행됩니다.</p>
+<ol type="1">
+<li>물리 상수와 재료 물성 설정</li>
+<li>HEMT 구조와 계산 격자 생성</li>
+<li>도핑과 고정전하 분포 설정</li>
+<li>전자와 정공 슈퍼입자 초기화</li>
+<li>Poisson 방정식 계산</li>
+<li>캐리어 자유비행</li>
+<li>산란과 계면 처리</li>
+<li>전하 밀도 갱신</li>
+<li>전류와 온도 계산</li>
+<li>결과와 체크포인트 저장</li>
+</ol>
 </section>
-<section id="superparticles" class="level2">
-<h2 class="anchored" data-anchor-id="superparticles">Superparticles</h2>
-<p>실제 소자의 많은 전자와 정공을 직접 계산하는 대신, 여러 캐리어를 대표하는 슈퍼입자를 사용합니다.</p>
-</section>
-<section id="carrier-transport" class="level2">
-<h2 class="anchored" data-anchor-id="carrier-transport">Carrier Transport</h2>
-<p>각 시간 단계에서 캐리어의 자유비행과 산란을 계산하고, 경계와 물질 계면에서의 입자 거동을 처리합니다.</p>
-</section>
-<section id="poisson-equation" class="level2">
-<h2 class="anchored" data-anchor-id="poisson-equation">Poisson Equation</h2>
-<p>캐리어와 고정 전하로부터 전하 밀도를 계산하고, Poisson 방정식을 풀어 전위와 전기장을 갱신합니다.</p>
-</section>
-<section id="scattering-mechanisms" class="level2">
-<h2 class="anchored" data-anchor-id="scattering-mechanisms">Scattering Mechanisms</h2>
-<p>시뮬레이터에 포함된 주요 산란 메커니즘과 각각의 물리적 의미를 정리할 예정입니다.</p>
-</section>
-<section id="interfaces-and-boundaries" class="level2">
-<h2 class="anchored" data-anchor-id="interfaces-and-boundaries">Interfaces and Boundaries</h2>
-<p>Source와 drain 접촉, 소자 외부 경계 및 서로 다른 물질의 계면에서 적용되는 조건을 설명할 예정입니다.</p>
-</section>
-<section id="self-heating" class="level2">
-<h2 class="anchored" data-anchor-id="self-heating">Self-Heating</h2>
-<p>평균 전류와 열저항을 이용해 대표 격자온도를 갱신하는 준정적 self-heating 모델을 설명할 예정입니다.</p>
-</section>
-<section id="simulation-flow" class="level2">
-<h2 class="anchored" data-anchor-id="simulation-flow">Simulation Flow</h2>
-<p>시뮬레이션의 전체 계산 순서와 각 단계의 연결 관계를 정리할 예정입니다.</p>
+<section id="main-simulation-loop" class="level2">
+<h2 class="anchored" data-anchor-id="main-simulation-loop">Main Simulation Loop</h2>
+<p>```python initialize_device() initialize_particles()</p>
+<p>for step in range(total_steps): solve_poisson() move_particles() apply_scattering() apply_boundaries() update_charge_density() calculate_current()</p>
 
 
 </section>

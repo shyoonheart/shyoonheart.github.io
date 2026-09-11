@@ -110,5 +110,40 @@
     "title": "Simulator",
     "section": "Simulation Flow",
     "text": "Simulation Flow\n시뮬레이션의 전체 계산 순서와 각 단계의 연결 관계를 정리할 예정입니다."
+  },
+  {
+    "objectID": "code.html",
+    "href": "code.html",
+    "title": "Code",
+    "section": "",
+    "text": "이 페이지에서는 HEMT Monte Carlo 시뮬레이터의 전체 프로그램 구조와 주요 계산 단계의 역할을 설명합니다.\n전체 소스 코드를 공개하기보다는 계산 흐름, 주요 입력값, 의사코드 및 성능 개선 과정을 중심으로 정리합니다."
+  },
+  {
+    "objectID": "code.html#overview",
+    "href": "code.html#overview",
+    "title": "Code",
+    "section": "",
+    "text": "이 페이지에서는 HEMT Monte Carlo 시뮬레이터의 전체 프로그램 구조와 주요 계산 단계의 역할을 설명합니다.\n전체 소스 코드를 공개하기보다는 계산 흐름, 주요 입력값, 의사코드 및 성능 개선 과정을 중심으로 정리합니다."
+  },
+  {
+    "objectID": "code.html#development-environment",
+    "href": "code.html#development-environment",
+    "title": "Code",
+    "section": "Development Environment",
+    "text": "Development Environment\n\nPython\nJupyter Notebook\nNumPy\nSciPy\nMatplotlib\nNumba"
+  },
+  {
+    "objectID": "code.html#program-structure",
+    "href": "code.html#program-structure",
+    "title": "Code",
+    "section": "Program Structure",
+    "text": "Program Structure\n시뮬레이터는 대략 다음 순서로 실행됩니다.\n\n물리 상수와 재료 물성 설정\nHEMT 구조와 계산 격자 생성\n도핑과 고정전하 분포 설정\n전자와 정공 슈퍼입자 초기화\nPoisson 방정식 계산\n캐리어 자유비행\n산란과 계면 처리\n전하 밀도 갱신\n전류와 온도 계산\n결과와 체크포인트 저장"
+  },
+  {
+    "objectID": "code.html#main-simulation-loop",
+    "href": "code.html#main-simulation-loop",
+    "title": "Code",
+    "section": "Main Simulation Loop",
+    "text": "Main Simulation Loop\n```python initialize_device() initialize_particles()\nfor step in range(total_steps): solve_poisson() move_particles() apply_scattering() apply_boundaries() update_charge_density() calculate_current()"
   }
 ]

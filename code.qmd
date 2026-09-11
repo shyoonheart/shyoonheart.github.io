@@ -1,0 +1,50 @@
+---
+title: "Code"
+subtitle: "시뮬레이터의 프로그램 구조와 구현 방법"
+---
+
+## Overview
+
+이 페이지에서는 HEMT Monte Carlo 시뮬레이터의 전체 프로그램
+구조와 주요 계산 단계의 역할을 설명합니다.
+
+전체 소스 코드를 공개하기보다는 계산 흐름, 주요 입력값,
+의사코드 및 성능 개선 과정을 중심으로 정리합니다.
+
+## Development Environment
+
+- Python
+- Jupyter Notebook
+- NumPy
+- SciPy
+- Matplotlib
+- Numba
+
+## Program Structure
+
+시뮬레이터는 대략 다음 순서로 실행됩니다.
+
+1. 물리 상수와 재료 물성 설정
+2. HEMT 구조와 계산 격자 생성
+3. 도핑과 고정전하 분포 설정
+4. 전자와 정공 슈퍼입자 초기화
+5. Poisson 방정식 계산
+6. 캐리어 자유비행
+7. 산란과 계면 처리
+8. 전하 밀도 갱신
+9. 전류와 온도 계산
+10. 결과와 체크포인트 저장
+
+## Main Simulation Loop
+
+```python
+initialize_device()
+initialize_particles()
+
+for step in range(total_steps):
+    solve_poisson()
+    move_particles()
+    apply_scattering()
+    apply_boundaries()
+    update_charge_density()
+    calculate_current()

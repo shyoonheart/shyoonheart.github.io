@@ -10,12 +10,14 @@ website:
         text: Home
       - href: simulator.qmd
         text: Simulator
+      - href: code.qmd
+        text: Code
 
 format:
   html:
     theme: cosmo
     css: styles.css
-    toc: true
+    toc: True
     code-fold: true
 
 lang: ko
