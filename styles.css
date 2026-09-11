@@ -1,0 +1,106 @@
+/* 전체 색상 */
+:root {
+  --hemt-navy: #102a43;
+  --hemt-blue: #176b87;
+  --hemt-teal: #0e9aa7;
+  --hemt-light: #f3f7fa;
+}
+
+/* 페이지 배경 */
+body {
+  background-color: var(--hemt-light);
+  color: #243b53;
+}
+
+/* 상단 메뉴 */
+.navbar {
+  background: linear-gradient(
+    120deg,
+    var(--hemt-navy),
+    var(--hemt-blue),
+    var(--hemt-teal)
+  ) !important;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #b9f3f6 !important;
+}
+
+/* 제목 영역 */
+.quarto-title-banner {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(16, 42, 67, 0.97),
+      rgba(14, 154, 167, 0.88)
+    );
+
+  color: white;
+}
+
+.quarto-title-banner .title,
+.quarto-title-banner .subtitle {
+  color: white !important;
+}
+
+/* 본문을 카드처럼 표시 */
+main.content {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+
+  background-color: white;
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 20px rgba(16, 42, 67, 0.08);
+}
+
+/* 소제목 */
+h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+
+  color: var(--hemt-navy);
+  border-bottom: 3px solid var(--hemt-teal);
+}
+
+h3 {
+  color: var(--hemt-blue);
+}
+
+/* 그림 */
+img {
+  border-radius: 10px;
+
+  box-shadow:
+    0 4px 16px rgba(16, 42, 67, 0.16);
+}
+
+/* 안내 상자 */
+.callout-note {
+  border-left-color: var(--hemt-teal) !important;
+}
+
+/* 작은 화면 */
+@media (max-width: 768px) {
+  main.content {
+    padding: 1.3rem;
+    border-radius: 0;
+  }
+
+  .quarto-title-banner {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}

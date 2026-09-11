@@ -1,6 +1,8 @@
 ---
 title: "HEMT Monte Carlo Simulation"
 subtitle: "GaN HEMT 캐리어 수송 시뮬레이터 개발 기록"
+title-block-banner: true
+toc: false
 ---
 
 ![p-GaN/AlGaN/AlN/GaN HEMT 구조와 계산 격자](mesh_full_overview.png){width=100% fig-align="center"}
