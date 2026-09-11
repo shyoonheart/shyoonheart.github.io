@@ -1,0 +1,60 @@
+---
+title: "Simulator"
+subtitle: "HEMT Monte Carlo 시뮬레이터의 물리 모델과 계산 방법"
+---
+
+## Overview
+
+이 페이지에서는 HEMT Monte Carlo 시뮬레이터가 어떤 소자를
+대상으로 하며, 캐리어 수송과 전기장을 어떤 방법으로 계산하는지
+설명합니다.
+
+## Device Structure
+
+- p-GaN gate
+- AlGaN barrier
+- AlN spacer
+- GaN channel
+- Carbon-doped GaN
+- GaN buffer
+- Source, gate and drain contacts
+
+## Simulation Domain and Mesh
+
+계산 영역은 x–z 방향의 2차원 공간으로 구성합니다. 캐리어의
+속도는 x, y, z 방향의 3성분을 사용합니다.
+
+## Superparticles
+
+실제 소자의 많은 전자와 정공을 직접 계산하는 대신,
+여러 캐리어를 대표하는 슈퍼입자를 사용합니다.
+
+## Carrier Transport
+
+각 시간 단계에서 캐리어의 자유비행과 산란을 계산하고,
+경계와 물질 계면에서의 입자 거동을 처리합니다.
+
+## Poisson Equation
+
+캐리어와 고정 전하로부터 전하 밀도를 계산하고, Poisson
+방정식을 풀어 전위와 전기장을 갱신합니다.
+
+## Scattering Mechanisms
+
+시뮬레이터에 포함된 주요 산란 메커니즘과 각각의 물리적
+의미를 정리할 예정입니다.
+
+## Interfaces and Boundaries
+
+Source와 drain 접촉, 소자 외부 경계 및 서로 다른 물질의
+계면에서 적용되는 조건을 설명할 예정입니다.
+
+## Self-Heating
+
+평균 전류와 열저항을 이용해 대표 격자온도를 갱신하는
+준정적 self-heating 모델을 설명할 예정입니다.
+
+## Simulation Flow
+
+시뮬레이션의 전체 계산 순서와 각 단계의 연결 관계를
+정리할 예정입니다.

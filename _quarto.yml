@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "HEMT Monte Carlo Simulation"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: simulator.qmd
+        text: Simulator
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
+
+lang: ko
