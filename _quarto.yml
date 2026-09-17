@@ -12,6 +12,8 @@ website:
         text: Simulator
       - href: code.qmd
         text: Code
+      - href: results.qmd
+        text: Results
 
 format:
   html:

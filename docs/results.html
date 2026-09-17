@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Code – HEMT Monte Carlo Simulation</title>
+<title>Results – HEMT Monte Carlo Simulation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -78,10 +78,10 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -104,10 +104,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Simulator</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./code.html" aria-current="page"> 
+    <a class="nav-link" href="./code.html"> 
 <span class="menu-text">Code</span></a>
   </li>  
-  <li class="nav-item"><a class="nav-link" href="./results.html"><span class="menu-text">Results</span></a></li>
+  <li class="nav-item"><a class="nav-link active" href="./results.html" aria-current="page"><span class="menu-text">Results</span></a></li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -116,84 +116,49 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Results</h1>
+            <p class="subtitle lead">구조 및 열 조건에 따른 전류 특성</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">목차</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
-  <li><a href="#program-structure" id="toc-program-structure" class="nav-link" data-scroll-target="#program-structure">Program Structure</a></li>
-  <li><a href="#main-simulation-loop" id="toc-main-simulation-loop" class="nav-link" data-scroll-target="#main-simulation-loop">Main Simulation Loop</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Code</h1>
-<p class="subtitle lead">시뮬레이터의 프로그램 구조와 구현 방법</p>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>이 페이지에서는 HEMT Monte Carlo 시뮬레이터의 전체 프로그램 구조와 주요 계산 단계의 역할을 설명합니다.</p>
-<p>전체 소스 코드를 공개하기보다는 계산 흐름, 주요 입력값, 의사코드 및 성능 개선 과정을 중심으로 정리합니다.</p>
-</section>
-<section id="development-environment" class="level2">
-<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
-<ul>
-<li>Python</li>
-<li>Jupyter Notebook</li>
-<li>NumPy</li>
-<li>SciPy</li>
-<li>Matplotlib</li>
-<li>Numba</li>
-</ul>
-</section>
-<section id="program-structure" class="level2">
-<h2 class="anchored" data-anchor-id="program-structure">Program Structure</h2>
-<p>시뮬레이터는 대략 다음 순서로 실행됩니다.</p>
-<ol type="1">
-<li>물리 상수와 재료 물성 설정</li>
-<li>HEMT 구조와 계산 격자 생성</li>
-<li>도핑과 고정전하 분포 설정</li>
-<li>전자와 정공 슈퍼입자 초기화</li>
-<li>Poisson 방정식 계산</li>
-<li>캐리어 자유비행</li>
-<li>산란과 계면 처리</li>
-<li>전하 밀도 갱신</li>
-<li>전류와 온도 계산</li>
-<li>결과와 체크포인트 저장</li>
-</ol>
-</section>
-<section id="main-simulation-loop" class="level2">
-<h2 class="anchored" data-anchor-id="main-simulation-loop">Main Simulation Loop</h2>
-<p>```python initialize_device() initialize_particles()</p>
-<p>for step in range(total_steps): solve_poisson() move_particles() apply_scattering() apply_boundaries() update_charge_density() calculate_current()</p>
-
-
-</section>
-
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+<nav aria-label="Results 목차"><p><a href="#baseline">기본 구조</a> · <a href="#lg">Gate length (Lg)</a> · <a href="#lsg">Source-to-gate distance (Lsg)</a> · <a href="#lgd">Gate-to-drain distance (Lgd)</a> · <a href="#temperature">Substrate temperature</a> · <a href="#rth">Thermal resistance</a></p></nav>
+<section id="conditions"><h2>공통 계산 조건</h2><p>구조 및 열 조건을 한 변수씩 변경한 전류 특성입니다. 별도 표기한 비교 변수를 제외하면 아래 기본 조건을 적용합니다.</p><div style="overflow-x:auto"><table class="table"><thead><tr><th>항목</th><th>조건</th></tr></thead><tbody><tr><td>계산 날짜</td><td>2026-09-15</td></tr><tr><td>기준 구조</td><td>Ls 500 / Lsg 400 / Lg 700 / Lgd 1225 / Ld 500 nm</td></tr><tr><td>기본 Tsub</td><td>300 K</td></tr><tr><td>기본 Rth</td><td>20 K·mm/W</td></tr><tr><td>Self-heating</td><td>ON — 준정적 열 모델</td></tr><tr><td>슈퍼입자 수</td><td>100,000</td></tr><tr><td>시간 간격</td><td>1 fs (1 × 10⁻¹⁵ s)</td></tr><tr><td>전압 조건별 steps</td><td>20,000</td></tr><tr><td>전류 평균</td><td>각 전압 조건의 마지막 10,000 steps</td></tr></tbody></table></div><p>열 모델: T<sub>device</sub> = T<sub>sub</sub> + R<sub>th</sub> V<sub>DS</sub> I<sub>DS</sub> (I<sub>DS</sub>: A/mm). 그래프의 전류 단위는 mA/mm입니다.</p><p>준정적 온도 갱신과 입자 수송 시간은 구분합니다. 현재 그림에는 통계적 오차막대를 표시하지 않았으며, 문턱전압·DIBL의 정량 추출은 포함하지 않습니다.</p></section>
+<section id="baseline" style="scroll-margin-top:90px"><h2>1. 기본 구조</h2><p>Ls = 500 nm, Lsg = 400 nm, Lg = 700 nm, Lgd = 1225 nm, Ld = 500 nm.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/baseline-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/baseline-transfer.png" alt="기본 구조 전달 특성, Vds = 1, 3, 5, 7, 9, 10 V"></a><figcaption class="figure-caption">Figure 1. 기본 구조 — Ids–Vgs, Vds = 1, 3, 5, 7, 9, 10 V.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/baseline-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/baseline-output.png" alt="기본 구조 출력 특성, Vgs = 1–6 V"></a><figcaption class="figure-caption">Figure 2. 기본 구조 — Ids–Vds, Vgs = 1–6 V.</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> 이후 비교의 기준 구조입니다. Vgs 증가에 따라 전류가 증가하고, 높은 Vgs의 출력 특성에서는 Vds 증가에 따른 전류 증가폭이 줄어듭니다.</p></section>
+<section id="lg" style="scroll-margin-top:90px"><h2>2. Gate length (Lg)</h2><p>Lg = 300, 500, 700 nm. 나머지 구조 치수는 기본값입니다.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lg-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lg-transfer.png" alt="Gate length (Lg) 전달 특성, Vds = 10 V"></a><figcaption class="figure-caption">Figure 3. Gate length (Lg) — Ids–Vgs, Vds = 10 V.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lg-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lg-output.png" alt="Gate length (Lg) 출력 특성, Vgs = 6 V (실선), 1 V (파선)"></a><figcaption class="figure-caption">Figure 4. Gate length (Lg) — Ids–Vds, Vgs = 6 V (실선), 1 V (파선).</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> Lg가 짧아질수록 ON-state 전류가 증가합니다. 300 nm에서는 낮은 gate 전압에서도 상당한 전류가 남습니다. 이는 short-channel effect에 따른 gate 제어 약화 가능성을 시사하지만, DIBL이나 문턱전압 이동량을 확정하는 결과는 아닙니다.</p></section>
+<section id="lsg" style="scroll-margin-top:90px"><h2>3. Source-to-gate distance (Lsg)</h2><p>Lsg = 400, 600, 800 nm. 나머지 구조 치수는 기본값입니다.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lsg-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lsg-transfer.png" alt="Source-to-gate distance (Lsg) 전달 특성, Vds = 10 V"></a><figcaption class="figure-caption">Figure 5. Source-to-gate distance (Lsg) — Ids–Vgs, Vds = 10 V.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lsg-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lsg-output.png" alt="Source-to-gate distance (Lsg) 출력 특성, Vgs = 6 V"></a><figcaption class="figure-caption">Figure 6. Source-to-gate distance (Lsg) — Ids–Vds, Vgs = 6 V.</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> Lsg가 길어질수록 높은 gate 전압에서 전류가 조금 감소하며, turn-on 구간은 거의 겹칩니다. 작은 곡선 차이의 원인은 이후 전위분포와 전류 통계로 보충합니다.</p></section>
+<section id="lgd" style="scroll-margin-top:90px"><h2>4. Gate-to-drain distance (Lgd)</h2><p>Lgd = 1225, 3000 nm. 나머지 구조 치수는 기본값입니다.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lgd-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lgd-transfer.png" alt="Gate-to-drain distance (Lgd) 전달 특성, Vds = 10 V"></a><figcaption class="figure-caption">Figure 7. Gate-to-drain distance (Lgd) — Ids–Vgs, Vds = 10 V.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/lgd-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/lgd-output.png" alt="Gate-to-drain distance (Lgd) 출력 특성, Vgs = 6 V"></a><figcaption class="figure-caption">Figure 8. Gate-to-drain distance (Lgd) — Ids–Vds, Vgs = 6 V.</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> 출력 특성에서 3000 nm의 전류가 더 낮고, 낮은 Vds에서 차이가 두드러집니다. 전달 특성은 대부분 겹치며 중간 Vgs에서 작은 교차가 있습니다. 전압 강하 및 self-heating의 기여는 추가 자료로 확인합니다.</p></section>
+<section id="temperature" style="scroll-margin-top:90px"><h2>5. Substrate temperature</h2><p>Tsub = 300, 350, 400 K. 기본 구조, Rth = 20 K·mm/W, self-heating ON.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/temperature-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/temperature-transfer.png" alt="Substrate temperature 전달 특성, Vds = 10 V"></a><figcaption class="figure-caption">Figure 9. Substrate temperature — Ids–Vgs, Vds = 10 V. 범례 T = Tsub, self-heating ON.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/temperature-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/temperature-output.png" alt="Substrate temperature 출력 특성, Vgs = 6 V"></a><figcaption class="figure-caption">Figure 10. Substrate temperature — Ids–Vds, Vgs = 6 V. 범례 T = Tsub, self-heating ON.</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> Tsub가 증가할수록 전달·출력 특성의 전류가 감소합니다. 그림의 T는 substrate temperature를 뜻합니다. Self-heating이 적용되어 실제 모델의 소자 온도는 Tsub와 다르며, 이 결과는 고정 소자 온도에서의 등온 비교가 아닙니다.</p></section>
+<section id="rth" style="scroll-margin-top:90px"><h2>6. Thermal resistance</h2><p>Rth = 20, 30, 40 K·mm/W. 기본 구조, Tsub = 300 K, self-heating ON.</p>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/rth-transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/rth-transfer.png" alt="Thermal resistance 전달 특성, Vds = 10 V"></a><figcaption class="figure-caption">Figure 11. Thermal resistance — Ids–Vgs, Vds = 10 V.</figcaption></figure>
+<figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/results/rth-output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" src="images/results/rth-output.png" alt="Thermal resistance 출력 특성, Vgs = 6 V"></a><figcaption class="figure-caption">Figure 12. Thermal resistance — Ids–Vds, Vgs = 6 V.</figcaption></figure><p><strong>관찰 및 해석 범위.</strong> 낮은 Vds에서 곡선이 거의 겹치지만 높은 Vds에서는 Rth가 클수록 전류가 낮아집니다. Rth = 40 K·mm/W에서는 약 4–5 V 이후 완만한 전류 감소가 보입니다. 온도·전력 기록으로 해석을 보충할 예정입니다.</p></section><section id="next"><h2>추후 보충 자료</h2><p>전류 그래프를 먼저 공개하고, 전위·전기장·carrier 분포와 온도 기록을 각 항목에 순차적으로 추가합니다. 현재 결과는 개발 중인 시뮬레이터의 비교 결과이며, 실험 소자의 정량적 검증을 대신하지 않습니다.</p></section>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -145,5 +145,12 @@
     "title": "Code",
     "section": "Main Simulation Loop",
     "text": "Main Simulation Loop\n```python initialize_device() initialize_particles()\nfor step in range(total_steps): solve_poisson() move_particles() apply_scattering() apply_boundaries() update_charge_density() calculate_current()"
+  },
+  {
+    "objectID": "results.html",
+    "href": "results.html",
+    "title": "Results",
+    "section": "",
+    "text": "계산 날짜 2026-09-15 기준 구조 Ls 500 / Lsg 400 / Lg 700 / Lgd 1225 / Ld 500 nm 기본 Tsub 300 K 기본 Rth 20 K·mm/W Self-heating ON — 준정적 열 모델 슈퍼입자 수 100,000 시간 간격 1 fs (1 × 10⁻¹⁵ s) 전압 조건별 steps 20,000 전류 평균 각 전압 조건의 마지막 10,000 steps 기본 구조 Ls = 500 nm, Lsg = 400 nm, Lg = 700 nm, Lgd = 1225 nm, Ld = 500 nm. 이후 비교의 기준 구조입니다. Vgs 증가에 따라 전류가 증가하고, 높은 Vgs의 출력 특성에서는 Vds 증가에 따른 전류 증가폭이 줄어듭니다. Gate length (Lg) Lg = 300, 500, 700 nm. 나머지 구조 치수는 기본값입니다. Lg가 짧아질수록 ON-state 전류가 증가합니다. 300 nm에서는 낮은 gate 전압에서도 상당한 전류가 남습니다. 이는 short-channel effect에 따른 gate 제어 약화 가능성을 시사하지만, DIBL이나 문턱전압 이동량을 확정하는 결과는 아닙니다. Source-to-gate distance (Lsg) Lsg = 400, 600, 800 nm. 나머지 구조 치수는 기본값입니다. Lsg가 길어질수록 높은 gate 전압에서 전류가 조금 감소하며, turn-on 구간은 거의 겹칩니다. 작은 곡선 차이의 원인은 이후 전위분포와 전류 통계로 보충합니다. Gate-to-drain distance (Lgd) Lgd = 1225, 3000 nm. 나머지 구조 치수는 기본값입니다. 출력 특성에서 3000 nm의 전류가 더 낮고, 낮은 Vds에서 차이가 두드러집니다. 전달 특성은 대부분 겹치며 중간 Vgs에서 작은 교차가 있습니다. 전압 강하 및 self-heating의 기여는 추가 자료로 확인합니다. Substrate temperature Tsub = 300, 350, 400 K. 기본 구조, Rth = 20 K·mm/W, self-heating ON. Tsub가 증가할수록 전달·출력 특성의 전류가 감소합니다. 그림의 T는 substrate temperature를 뜻합니다. Self-heating이 적용되어 실제 모델의 소자 온도는 Tsub와 다르며, 이 결과는 고정 소자 온도에서의 등온 비교가 아닙니다. Thermal resistance Rth = 20, 30, 40 K·mm/W. 기본 구조, Tsub = 300 K, self-heating ON. 낮은 Vds에서 곡선이 거의 겹치지만 높은 Vds에서는 Rth가 클수록 전류가 낮아집니다. Rth = 40 K·mm/W에서는 약 4–5 V 이후 완만한 전류 감소가 보입니다. 온도·전력 기록으로 해석을 보충할 예정입니다."
   }
 ]
