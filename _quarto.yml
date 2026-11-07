@@ -14,6 +14,10 @@ website:
         text: Code
       - href: results.qmd
         text: Results
+      - text: Studies
+        menu:
+          - href: fixed-charge.qmd
+            text: Fixed Charge — 고정 음전하 민감도
 
 format:
   html:

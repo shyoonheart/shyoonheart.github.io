@@ -33,6 +33,24 @@ body {
   color: #b9f3f6 !important;
 }
 
+/* 드롭다운 메뉴 */
+.navbar .dropdown-menu {
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 0;
+  box-shadow: 0 6px 20px rgba(16, 42, 67, 0.18);
+}
+
+.navbar .dropdown-item {
+  color: var(--hemt-navy);
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background-color: var(--hemt-light);
+  color: var(--hemt-teal);
+}
+
 /* 제목 영역 */
 .quarto-title-banner {
   padding-top: 4rem;

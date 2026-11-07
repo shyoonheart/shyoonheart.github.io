@@ -1,0 +1,67 @@
+{
+  "main": {
+    "original_sources_unchanged": true,
+    "production_count": 21,
+    "pair_count": 18,
+    "all_finite": true,
+    "all_gpu_30000_steps": true,
+    "all_100000_particles": true,
+    "all_20000_density_samples": true,
+    "all_20000_phi_samples": true,
+    "max_inventory_error": 4.440892098500626e-16,
+    "max_deposition_error": 6.796468798754895e-16,
+    "max_abs_drift_pct": 0.45451058350303664,
+    "max_abs_full_gd_pct": 0.04465834706365178
+  },
+  "hardwall_protocol": "Same settled source, same seed301, 300K, Vgs6/Vds8 held fixed, charge held fixed. Only hole hardwall changes. 100k particles, 30k steps, final20k average; one repeat per condition.",
+  "hardwall_pairs": [
+    {
+      "region": "control",
+      "current_change_pct": -2.3769021171850313,
+      "hole_total_change_pct": -2.220446049250313e-14,
+      "mean_phi_rms_difference_V": 0.015152643592059253,
+      "mean_hole_density_l1_relative": 0.6111697894205919,
+      "pgan_mean_phi_change_V": 0.023004749729424546,
+      "gate_channel_mean_phi_change_V": 0.004802221963997436,
+      "mean_phi_max_difference_V": 0.08288208279957532,
+      "mean_electron_density_l1_relative": 0.007502636669451919
+    },
+    {
+      "region": "channel_gate",
+      "current_change_pct": -3.747871060286734,
+      "hole_total_change_pct": 2.220446049250313e-14,
+      "mean_phi_rms_difference_V": 0.014987902767646383,
+      "mean_hole_density_l1_relative": 0.6363878864582587,
+      "pgan_mean_phi_change_V": 0.022430802197862865,
+      "gate_channel_mean_phi_change_V": 0.004648208730880551,
+      "mean_phi_max_difference_V": 0.08117404831615582,
+      "mean_electron_density_l1_relative": 0.00729434826820866
+    }
+  ],
+  "actual_geometry": {
+    "surface_gd": {
+      "label": "A \uc601\uc5ed \u00b7 GD \ud45c\uba74 \ubd80\uadfc",
+      "thickness_nm": 1.5000000000000069,
+      "width_nm": 1224.9999999999989,
+      "density_large_cm3": 6.666666666666636e+18
+    },
+    "channel_gd": {
+      "label": "B \uc601\uc5ed \u00b7 GD \ucc44\ub110",
+      "thickness_nm": 9.760423148196251,
+      "width_nm": 1224.9999999999989,
+      "density_large_cm3": 1.02454574439716e+18
+    },
+    "buffer_gd": {
+      "label": "C \uc601\uc5ed \u00b7 GD buffer",
+      "thickness_nm": 500.00000000000006,
+      "width_nm": 1224.9999999999989,
+      "density_large_cm3": 1.9999999999999996e+16
+    },
+    "channel_gate": {
+      "label": "D \uc601\uc5ed \u00b7 Gate \uc544\ub798 GaN \ucc44\ub110",
+      "thickness_nm": 9.760423148196251,
+      "width_nm": 699.9999999999984,
+      "density_large_cm3": 1.02454574439716e+18
+    }
+  }
+}
