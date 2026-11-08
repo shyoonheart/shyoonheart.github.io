@@ -1,10 +1,12 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - favicon.ico
 
 website:
   title: "HEMT Monte Carlo Simulation"
-  favicon: images/favicon.png
+  favicon: images/favicon-v2.png
   navbar:
     left:
       - href: index.qmd
