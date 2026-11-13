@@ -1,0 +1,85 @@
+{
+  "provenance": "Static notebook AST plus saved mesh/checkpoint/history; no notebook execution",
+  "notebook_sha256": "8e8e106021efac908b307f6bcf108ef7b600eebe64fe3b43fc02db1872c0cb34",
+  "gpu_module_sha256": "bc0352e6ffd308828e4453895dd376c8e2c589eee91f2e743af0a71b620e6008",
+  "mesh_sha256": "8ebcf5d84e3e501b6c4e88f3f27bc49656232df87a1f9b19b050119cd96f55f4",
+  "layers_top_to_bottom_nm_material_Al_fraction_doping_cm3_type": [
+    [
+      100,
+      "GaN",
+      0.0,
+      2e+17,
+      "p"
+    ],
+    [
+      15,
+      "AlGaN",
+      0.2,
+      1000000000000000.0,
+      "n"
+    ],
+    [
+      1,
+      "AlGaN",
+      1.0,
+      1000000000000000.0,
+      "n"
+    ],
+    [
+      5,
+      "GaN",
+      0.0,
+      100000000000000.0,
+      "n"
+    ],
+    [
+      145,
+      "GaN",
+      0.0,
+      100000000000000.0,
+      "n"
+    ],
+    [
+      500,
+      "GaN",
+      0.0,
+      10000000000000.0,
+      "n"
+    ],
+    [
+      1000,
+      "GaN",
+      0.0,
+      10000000000000.0,
+      "n"
+    ]
+  ],
+  "mesh_shape": [
+    140,
+    71
+  ],
+  "particle_counts_e_h": [
+    95675,
+    4325
+  ],
+  "inventory_per_m_e_h": [
+    309771012232.5177,
+    13999999999.999966
+  ],
+  "superparticle_weight_per_m_e_h": [
+    3237742.4847924504,
+    3236994.219653171
+  ],
+  "relevant_parameter_defaults": {
+    "suppress_ez_2deg": true,
+    "ez_suppress_z_top_nm": 116.0,
+    "ez_suppress_z_bot_nm": 126.0,
+    "ez_suppress_alpha": 0.01,
+    "qz_pop_scale": 1.0,
+    "pop_angle_aniso": true,
+    "pop_aniso_eta": 0.5,
+    "piezo_forward_gamma": 1.0,
+    "hole_weight_factor": 1.0
+  },
+  "caveat": "Effective input p doping; no Mg activation fit performed in this comparison. Defaults retained by runner; geometry and material maps frozen."
+}

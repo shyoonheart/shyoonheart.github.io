@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Gate AlGaN Charge – HEMT Monte Carlo Simulation</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/favicon-v2.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bb5ce4f09c3d713477d34b1921f208f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">HEMT Monte Carlo Simulation</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="검색"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="탐색 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./simulator.html"> 
+<span class="menu-text">Simulator</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code.html"> 
+<span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./results.html"> 
+<span class="menu-text">Results</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-studies" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Studies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-studies">    
+        <li>
+    <a class="dropdown-item" href="./fixed-charge.html">
+ <span class="dropdown-text">Fixed Charge — 고정 음전하 민감도</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./gate-algan-charge.html">
+ <span class="dropdown-text">Gate AlGaN Charge — 문턱·ON 저항</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Gate AlGaN Charge</h1>
+            <p class="subtitle lead">Gate 아래 AlGaN의 고정 음전하가 p-GaN HEMT의 문턱과 ON 저항에 미치는 영향</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<nav aria-label="Gate AlGaN Charge 목차"><p><a href="#key-results">핵심 결과</a> · <a href="#structure">목적과 구조</a> · <a href="#method">계산과 비교 방법</a> · <a href="#transfer">전달특성과 문턱</a> · <a href="#output">출력특성과 자가발열</a> · <a href="#channel">채널 전위와 밀도</a> · <a href="#validation">추가 검증</a> · <a href="#conclusion">결론과 해석 범위</a> · <a href="#references">참고 문헌과 데이터</a></p></nav>
+
+<section id="key-results" style="scroll-margin-top:90px"><h2 class="anchored">핵심 결과</h2><p>Gate 아래 AlGaN 장벽에 등가 면밀도 10¹² cm⁻²의 고정 음전하를 분포시키고, 전달특성과 출력특성이 어느 방향으로 얼마나 달라지는지 계산했습니다. <a href="fixed-charge.html">Fixed Charge</a> 연구에서 Gate 아래 GaN 채널에 넣었던 전하를 AlN 바로 위 AlGaN 장벽으로 옮긴 후속 비교입니다.</p><ul><li><strong>문턱:</strong> Vds = 0.5 V에서 5 mA/mm에 도달하는 Gate 전압이 N<sub>s</sub> = 10¹¹ cm⁻²에서 약 +0.08 V, N<sub>s</sub> = 10¹² cm⁻²에서 약 +0.62 V 높아집니다.</li><li><strong>ON 저항:</strong> Vgs = 6 V, Vds = 0.1–0.5 V에서 추정한 겉보기 ON 저항이 N<sub>s</sub> = 10¹² cm⁻²에서 약 25.9% 증가합니다.</li><li><strong>고전압 전류:</strong> Vgs = 6 V, Vds = 8 V 전류가 N<sub>s</sub> = 10¹² cm⁻²에서 23.2% 감소하고, 그에 따라 모델 격자 온도도 18.1 K 낮아집니다.</li><li><strong>검증:</strong> 고정 길이 추가 계산, 다른 난수열, 상향 스윕 비교 22건(총 6,420,000 steps)에서도 결론이 유지됩니다.</li></ul><p>이 계산은 이미 점유된 음전하의 위치와 양을 지정하고 수송 응답을 구한 것입니다. 실제 결함의 포획·방출 동역학이나 실측 특성의 재현은 범위에 포함하지 않습니다.</p></section>
+
+<section id="structure" style="scroll-margin-top:90px"><h2 class="anchored">연구 목적과 소자 구조</h2><p>Greco 등은 p-GaN HEMT의 Gate 스트레스 실험에서 관찰한 문턱 변화를 설명하는 기작 중 하나로 AlGaN 장벽에서의 전자 포획을 제안했습니다 <a href="#ref1">[1]</a>. 이 연구에서는 현재 소자의 구조를 유지한 채, 그 위치에 음전하가 존재한다는 가정만으로 전달특성과 출력특성이 어느 방향으로 얼마나 달라지는지 계산했습니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/structure.png"><img class="img-fluid figure-img" style="width:100%;height:auto" width="1416" height="606" src="images/gate-algan/structure.png" alt="Gate 아래 AlGaN 15 nm 영역에 추가 음전하를 넣은 소자 단면"></a><figcaption class="figure-caption">Figure 1. 빗금은 추가 음전하를 넣은 Gate 아래 AlGaN 영역입니다. 층 두께와 가로 치수는 이해를 돕기 위해 축척을 달리했습니다.</figcaption></figure><p>추가 전하는 x = 900–1,600 nm, z = 100–115 nm의 AlGaN 15 nm에 균일하게 분포시켰습니다. 이전 연구의 Gate 아래 GaN 관측 영역(z = 116–126 nm)과는 AlN 1 nm가 경계를 이룹니다. 추가 전하가 없는 조건과 N<sub>s</sub> = 10¹¹ cm⁻², N<sub>s</sub> = 10¹² cm⁻² 조건을 비교했습니다. 여기서 N<sub>s</sub>는 추가 음전하의 등가 면밀도로, 깊이 방향으로 적분한 추가 점유 전자의 수입니다. 체적밀도로는 각각 6.67 × 10¹⁶, 6.67 × 10¹⁷ cm⁻³이며, 두 값은 이전 민감도 연구와 비교하기 위해 선택했습니다.</p></section>
+
+<section id="method" style="scroll-margin-top:90px"><h2 class="anchored">계산과 비교 방법</h2><p>자가발열과 정공 hard wall을 켠 Monte Carlo–Poisson 모델에서 총 100,000개 입자를 1 fs 간격으로 추적했습니다. 추가 전하는 Poisson 공간전하에 반영했습니다. 이동전자·정공의 총량과 입자 가중치를 유지하므로, 채널 밀도의 변화에는 전체 이동전자 집단의 공간적 재분포가 반영됩니다. 포획 후 접촉과 주고받는 전하량을 포함한 실험의 전하수지에 대응시킬 때는 이 제약을 함께 고려해야 합니다. 불순물 산란 지도는 추가 전하가 없는 소자와 같습니다. 각 조건은 같은 안정 상태에서 시작해 20,000 steps 동안 음전하를 점진적으로 늘렸고, 이후 각 전압에서 입자·전위·온도를 이어받았습니다.</p><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">항목</th>
+<th data-quarto-table-cell-role="th">조건</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전달특성</td>
+<td>Vds = 0.5 V, Vgs 6 → 0 V 하향; 1 V 간격 교차 구간을 0.1 V, 0.05 V 간격으로 보강</td>
+</tr>
+<tr class="even">
+<td>출력특성</td>
+<td>Vgs = 6 V, Vds = 0.1–8 V의 11개 전압 조건</td>
+</tr>
+<tr class="odd">
+<td>계산 규모</td>
+<td>두 전하 조건 각 30개, 추가 전하 없음 30개, 총 90개 전압 조건이 안정화·정밀도 기준 통과</td>
+</tr>
+<tr class="even">
+<td>평균 구간</td>
+<td>새 전달특성과 1 V 이상 출력특성은 80,000 steps, 낮은 Drain 전압은 240,000 steps</td>
+</tr>
+<tr class="odd">
+<td>격자와 치수</td>
+<td>140 × 71 셀; Lg 700 nm, SG 400 nm, GD 1,225 nm</td>
+</tr>
+<tr class="even">
+<td>재료</td>
+<td>Al 몰분율 0.20; p-GaN 유효 p형 도핑 2 × 10¹⁷ cm⁻³; z = 266–766 nm Carbon acceptor 10¹⁶ cm⁻³ 유지</td>
+</tr>
+<tr class="odd">
+<td>입자</td>
+<td>전자 95,675개, 정공 4,325개; 조건별 입자 수와 가중치 유지</td>
+</tr>
+<tr class="even">
+<td>열 모델</td>
+<td>기판 300 K, 열저항 20 K·mm/W의 공간 균일 자가발열</td>
+</tr>
+</tbody>
+</table>
+</div><p>각 전압에서 20,000 steps마다 인접한 두 시간 구간의 평균을 비교했습니다. 전류·온도·열수지·전위·정공 분포·Gate 채널 면밀도 기준을 두 번 연속 통과한 뒤 전류 평균의 블록 표준오차를 확인했습니다. 추가 전하가 없는 조건의 기존 곡선 중 초기 전압 조건 일부는 더 짧은 평균을 사용했습니다. 이 비교에서 Mg 활성화율을 새롭게 추출하지는 않았습니다.</p><p>전류는 x = 600–2,725 nm 수송 구간에 있는 전자의 x방향 속도를 합하고 구간 길이 2,125 nm로 정규화한 추정량을 시간 평균했으며, Gate–Drain 구간의 속도합 전류와도 대조했습니다.</p><p>기존 수송 모델은 음향 포논, 극성 광학 포논, 압전, 합금 및 이온화 불순물 산란과 설정된 계면 포논 산란을 사용합니다. z = 116–126 nm의 전자 수송 창에서는 z방향 전계 가속을 0.01배로 줄이는 기존 준2DEG 근사를 유지했습니다. Poisson 전계는 그대로 계산하며, 별도의 자기일관 Schrödinger–Poisson 해는 구하지 않았습니다. Gate 전위에는 기존 약 −7.034 V의 내장전위 보정이 포함됩니다. 접촉에서 입자를 재주입하면서 총 이동입자 수를 유지하는 경계 조건을 사용했습니다. 상세 층·입자 가중치·설정은 <a href="data/gate-algan/model-specification.json">모델 명세</a>에 기록했습니다.</p><p><strong>안정성 판정.</strong> 안정성 검사는 계산을 20,000 steps 더 진행할 때마다 반복하고, 살펴보는 시간 구간도 20,000 steps씩 앞으로 옮겼습니다. 80,000 steps 구간에는 직전 검사에서 본 기록 60,000 steps가, 240,000 steps 구간에는 220,000 steps가 포함되어 각각 75%, 91.7%가 겹칩니다. 따라서 두 번 연속 통과했다는 것은 계산을 조금 더 이어가도 정해 둔 기준을 만족했다는 뜻이며, 서로 다른 자료로 두 번 독립적으로 확인했다는 뜻은 아닙니다. 우연히 변화가 작은 시점에 통과한 것은 아닌지 확인하기 위해, 대표 조건에서는 멈춘 상태에서 320,000 또는 480,000 steps를 일찍 멈추지 않고 미리 정한 길이만큼 더 계산했습니다. 그 결과는 <a href="#validation">추가 검증</a>에 제시합니다.</p><p><strong>블록SEM.</strong> SEM은 평균의 표준오차(Standard Error of the Mean)입니다. 블록SEM은 전류 기록을 여러 묶음으로 나누고 각 묶음 평균의 차이를 이용해 평균 전류의 통계적 불확실성을 추정한 값입니다. 순간 전류의 흔들림이나 반드시 참값을 포함하는 오차 범위를 뜻하지 않습니다. 조건 사이의 상관, 입자 초기분포, 격자 세분화까지 포함한 전체 불확실성은 따로 평가해야 합니다.</p><p>그림의 기호는 계산점이고 전류 오차 막대는 시간 블록으로 구한 평균의 표준오차입니다. 곡선은 인접 계산점 사이의 형태 보존 구간별 3차 보간(PCHIP)입니다. 문턱은 기준 전류를 사이에 둔 두 계산점의 선형 보간으로, 저항은 낮은 Drain 전압 세 전압 조건의 가중 직선 적합으로 산출했습니다.</p></section>
+
+<section id="transfer" style="scroll-margin-top:90px"><h2 class="anchored">전달특성과 문턱 이동</h2><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/transfer.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1419" height="696" src="images/gate-algan/transfer.png" alt="Vds 0.5 V 전달특성, 세 전하 조건 비교"></a><figcaption class="figure-caption">Figure 2. 같은 Vgs에서 장벽의 음전하가 커질수록 전류가 낮아집니다. 기호는 1 V 간격의 예비 계산점입니다.</figcaption></figure><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/threshold.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1418" height="696" src="images/gate-algan/threshold.png" alt="문턱 부근 0.1 V 간격 계산점과 5 mA/mm 기준선"></a><figcaption class="figure-caption">Figure 3. 수평 점선은 5 mA/mm입니다. 색 곡선은 0.1 V 계산점 사이의 PCHIP 보간, 빈 마름모는 0.05 V 세부 계산점, 별은 표의 문턱을 구한 선형 보간점입니다.</figcaption></figure><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">추가 음전하의 크기</th>
+<th data-quarto-table-cell-role="th">V<sub>th,CC</sub> (5 mA/mm, Vds 0.5 V)</th>
+<th data-quarto-table-cell-role="th">문턱 이동</th>
+<th data-quarto-table-cell-role="th">0.1–0.5 V 겉보기 ON 저항</th>
+<th data-quarto-table-cell-role="th">8 V 전류</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>추가 전하 없음</td>
+<td>2.018 V</td>
+<td>—</td>
+<td>2.610 Ω·mm</td>
+<td>488.84 mA/mm</td>
+</tr>
+<tr class="even">
+<td>N<sub>s</sub> = 10¹¹ cm⁻²</td>
+<td>2.099 V</td>
+<td>+0.081 V</td>
+<td>2.660 Ω·mm</td>
+<td>477.71 mA/mm</td>
+</tr>
+<tr class="odd">
+<td>N<sub>s</sub> = 10¹² cm⁻²</td>
+<td>2.633 V</td>
+<td>+0.616 V</td>
+<td>3.286 Ω·mm</td>
+<td>375.25 mA/mm</td>
+</tr>
+</tbody>
+</table>
+</div><p>문턱은 세 조건 모두 하향 스윕의 0.05 V 간격 교차점에서 선형 보간했습니다. N<sub>s</sub> = 10¹¹ cm⁻² 조건은 추가한 2.05 V 전압 조건과 기존 2.10 V 전압 조건을 사용합니다. 저항과 8 V 전류는 기존 주 계산값이며, 정해진 길이만큼 추가 계산한 평균은 <a href="#validation">추가 검증</a>에 함께 제시합니다. 문턱은 이 페이지의 일정 전류 작업 정의입니다. Greco 등의 1 μA 기준 문턱과 정량 비교하려면 소자 폭·읽기 전압·추출 조건을 맞춰야 합니다.</p><p>N<sub>s</sub> = 10¹¹ cm⁻² 조건에서 추가한 Vgs = 2.05 V의 전류는 3.193 ± 0.170 mA/mm, 기존 2.10 V는 5.035 ± 0.184 mA/mm였습니다. 평균값을 기준으로 5 mA/mm 교차 구간을 확보했으며 V<sub>th</sub>는 약 2.099 V, 추가 전하가 없는 소자 대비 이동은 약 +0.081 V였습니다. 다만 2.10 V 전류는 여전히 표준오차 범위에서 기준 전류에 걸칩니다. 추가 전압 조건은 기존 2.10 V 저장 상태를 이어받은 하향 계산이며 독립 초기화는 아닙니다.</p><p>평균 전류의 표준오차가 문턱에 주는 영향은 전류의 블록SEM을 문턱 부근의 기울기 g<sub>m</sub> = dI<sub>d</sub>/dV<sub>gs</sub>로 나눈 SEM(I<sub>d</sub>)/g<sub>m</sub>으로 환산했습니다. 같은 전류 오차라도 곡선이 가파르면 전압 환산값은 작고, 완만하면 커집니다. 이 값은 추가 전하가 없는 조건에서 약 5.2 mV, N<sub>s</sub> = 10¹¹ cm⁻² 조건에서 약 5.0 mV, N<sub>s</sub> = 10¹² cm⁻² 조건에서 약 3.2 mV였습니다. 문턱을 독립적으로 여러 번 구해 얻은 표준편차나 모든 오차를 포함한 값은 아니며, 교차 구간 선택과 비선형 보간의 오차도 포함하지 않습니다. 표의 세 자리 소수는 추출값 표기이며 1 mV 정확도를 보장하지 않습니다.</p><h3 class="anchored">기준 전류에 따른 문턱 이동</h3><p>문턱 정의의 영향을 확인하기 위해 Vds = 0.5 V에서 기준 전류를 5–20 mA/mm로 바꾸었습니다. 모든 조건에 같은 하향 0.1 V 탐색 자료와 두 계산점 선형 보간을 적용했으므로, 위 표의 0.05 V 세부 방법과는 구분해 비교합니다.</p><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">기준 전류 (mA/mm)</th>
+<th data-quarto-table-cell-role="th">추가 전하 없음 V<sub>th</sub> (V)</th>
+<th data-quarto-table-cell-role="th">N<sub>s</sub> = 10¹¹ cm⁻² ΔV<sub>th</sub> (V)</th>
+<th data-quarto-table-cell-role="th">N<sub>s</sub> = 10¹² cm⁻² ΔV<sub>th</sub> (V)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5</td>
+<td>2.017</td>
+<td>+0.084</td>
+<td>+0.614</td>
+</tr>
+<tr class="even">
+<td>7.5</td>
+<td>2.075</td>
+<td>+0.077</td>
+<td>+0.609</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>2.127</td>
+<td>+0.078</td>
+<td>+0.600</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>2.216</td>
+<td>+0.079</td>
+<td>+0.586</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>2.294</td>
+<td>+0.077</td>
+<td>+0.578</td>
+</tr>
+</tbody>
+</table>
+</div><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/reference-current-sensitivity.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1959" height="712" src="images/gate-algan/reference-current-sensitivity.png" alt="기준 전류 5–20 mA/mm에 따른 일정 전류 문턱과 이동량"></a><figcaption class="figure-caption">Figure 4. 기준 전류에 따른 일정 전류 문턱과 이동량. 기호와 표는 선형 보간값이고 부드러운 곡선은 원래 전달곡선의 PCHIP 보간에서 구했습니다. 오차 막대는 각 문턱의 블록SEM 환산값입니다.</figcaption></figure><p>N<sub>s</sub> = 10¹¹ cm⁻² 조건의 이동은 약 +0.077 – +0.084 V, N<sub>s</sub> = 10¹² cm⁻² 조건은 약 +0.578 – +0.614 V로 증가 방향이 유지됩니다. N<sub>s</sub> = 10¹² cm⁻² 조건에서 기준 전류가 높아질수록 이동량이 줄어드는 것은 전달특성의 형태 변화와 ON 전류 억제가 함께 반영되기 때문입니다. 따라서 일정 전류 문턱의 절대값과 이동량에는 기준 전류를 함께 명시해야 합니다. 2·3 mA/mm는 추가 전하가 없는 소자의 세부 탐색 최저 전류 약 4.30 mA/mm보다 낮아 세 조건의 비교를 보류했습니다.</p></section>
+
+<section id="output" style="scroll-margin-top:90px"><h2 class="anchored">출력특성과 자가발열</h2><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/output.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1419" height="696" src="images/gate-algan/output.png" alt="Vgs 6 V 출력특성, 세 전하 조건 비교"></a><figcaption class="figure-caption">Figure 5. 8 V에서 N<sub>s</sub> = 10¹¹ cm⁻² 조건과 N<sub>s</sub> = 10¹² cm⁻² 조건의 전류는 추가 전하가 없는 조건보다 각각 2.28%, 23.24% 낮습니다.</figcaption></figure><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/resistance.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1419" height="696" src="images/gate-algan/resistance.png" alt="ON 저항 산출에 사용한 0.1, 0.25, 0.5 V 계산점"></a><figcaption class="figure-caption">Figure 6. ON 저항 산출에 사용한 0.1, 0.25, 0.5 V의 계산점. 표시 곡선은 세 전압 조건 사이의 보간입니다.</figcaption></figure><p>Vgs = 6 V, Vds = 0.1·0.25·0.5 V 세 전압 조건의 가중 직선 적합으로 구한 겉보기 저항은 N<sub>s</sub> = 10¹¹ cm⁻² 조건에서 약 1.90%, N<sub>s</sub> = 10¹² cm⁻² 조건에서 약 25.89% 증가했습니다. 세 전압 조건을 직선으로 적합했을 때 최대 전류 잔차는 조건별로 약 2.5–2.6 mA/mm였으므로, 저항값은 이 전압 구간을 대표하는 기울기로 해석합니다.</p><p>구간별 저항은 R = ΔV<sub>ds</sub>/ΔI<sub>d</sub>로 따로 계산했고 0 V 계산점은 포함하지 않았습니다. 두 구간에서 증가 방향은 유지되지만 증가율은 달랐으므로, 수치는 해당 Vds 구간과 함께 제시합니다.</p><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Vds 구간</th>
+<th data-quarto-table-cell-role="th">추가 전하 없음 저항 (Ω·mm)</th>
+<th data-quarto-table-cell-role="th">N<sub>s</sub> = 10¹¹ cm⁻² 저항 / 증가율</th>
+<th data-quarto-table-cell-role="th">N<sub>s</sub> = 10¹² cm⁻² 저항 / 증가율</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.10–0.25 V</td>
+<td>2.436</td>
+<td>2.469 / +1.35%</td>
+<td>2.992 / +22.82%</td>
+</tr>
+<tr class="even">
+<td>0.25–0.50 V</td>
+<td>2.717</td>
+<td>2.770 / +1.96%</td>
+<td>3.461 / +27.37%</td>
+</tr>
+</tbody>
+</table>
+</div><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/resistance-ranges.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1419" height="661" src="images/gate-algan/resistance-ranges.png" alt="Vds 구간별 기울기 저항 증가율"></a><figcaption class="figure-caption">Figure 7. Vgs = 6 V에서 Vds 구간에 따른 기울기 저항 증가율. 막대는 각 구간의 두 계산점으로 얻은 값입니다.</figcaption></figure><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/heat.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1419" height="696" src="images/gate-algan/heat.png" alt="Vds 8 V에서 세 조건의 모델 격자 온도"></a><figcaption class="figure-caption">Figure 8. 8 V에서 모델 격자 온도는 추가 전하가 없는 조건 378.16 K, N<sub>s</sub> = 10¹¹ cm⁻² 조건 376.46 K, N<sub>s</sub> = 10¹² cm⁻² 조건 360.05 K입니다.</figcaption></figure><p>기판 온도 300 K와 열저항 20 K·mm/W를 사용한 공간 균일 자가발열 모델에서, 같은 Drain 전압의 전류 감소는 소비전력 감소로 이어졌습니다. N<sub>s</sub> = 10¹² cm⁻² 조건에서는 8 V 온도가 추가 전하가 없는 조건보다 18.10 K 낮았습니다. 보고한 전류에는 이 온도 변화가 수송에 미친 영향도 포함되어 있습니다.</p></section>
+
+<section id="channel" style="scroll-margin-top:90px"><h2 class="anchored">채널 전위와 전자 밀도</h2><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/channel.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1418" height="603" src="images/gate-algan/channel.png" alt="Vgs 6 V, Vds 0.5 V에서 Gate 아래 GaN 채널 창의 밀도와 전도대 변화"></a><figcaption class="figure-caption">Figure 9. Vgs = 6 V, Vds = 0.5 V에서 Gate 아래 GaN 채널 창(z = 116–126 nm)을 관측했습니다. 오른쪽은 추가 전하가 없는 조건 대비 전위 변화에서 환산한 전도대의 정전기 성분입니다.</figcaption></figure><p>N<sub>s</sub> = 10¹² cm⁻² 조건에서 GaN 채널 창의 전도대 정전기 성분은 평균 50.3 meV 높아졌고, 전자 면밀도는 2.11 × 10¹²에서 1.50 × 10¹² cm⁻²로 28.7% 감소했습니다. N<sub>s</sub> = 10¹¹ cm⁻² 조건에서는 각각 +4.6 meV와 −2.95%였습니다. ON 상태의 전위 저하와 전자 밀도 감소는 음전하가 채널 형성을 억제한다는 정전기적 해석과 정성적으로 일치합니다.</p><p>이 관측은 Vgs = 6 V의 공간 평균입니다. 문턱을 추출한 Vgs 약 2.0–2.6 V에서는 전자 분포와 전하 차폐, 전위 분포가 달라집니다. 따라서 ON 상태의 평균 50.3 meV와 문턱 이동 0.616 V를 직접 대응시키지 않습니다. 문턱 이동 기작을 더 구체적으로 평가하려면 문턱 부근의 위치별 전위·전도대·전자 밀도를 비교해 주입 장벽과 채널 형성 변화를 확인해야 합니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/same-Vgs-2p60.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1959" height="711" src="images/gate-algan/same-Vgs-2p60.png" alt="Vgs 2.60 V, Vds 0.5 V에서 전도대 정전기 성분과 Gate 아래 전자 면밀도"></a><figcaption class="figure-caption">Figure 10. Vgs = 2.60 V, Vds = 0.5 V의 저장 평균 분포. 왼쪽은 GaN 채널 창의 전도대 정전기 성분을 Source 접근 영역에 상대화한 값이고 오른쪽은 Gate 아래 전자 면밀도입니다. 음영은 Gate 영역입니다.</figcaption></figure><p>같은 Gate 전압에서 N<sub>s</sub> = 10¹² cm⁻²의 추가 음전하는 Gate 아래 전도대 정전기 성분을 높이고 채널 창의 전자 밀도를 낮춥니다. 이는 같은 전류에 도달하려면 더 높은 Gate 전압이 필요하다는 해석과 일치합니다. 전위의 공간 변화는 Source 측 x = 600–800 nm의 같은 깊이 창을 기준으로 표시했습니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/equal-current-5.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1959" height="711" src="images/gate-algan/equal-current-5.png" alt="Id 5 mA/mm가 되는 전압에서 추정한 전위·밀도 분포"></a><figcaption class="figure-caption">Figure 11. I<sub>d</sub> = 5 mA/mm가 되는 전압에서 추정한 전위·밀도 분포. 각 조건의 인접한 두 저장 전압점 사이에서 평균장을 선형 조합했고, 공간 곡선의 표시에는 PCHIP를 사용했습니다.</figcaption></figure><p>같은 전류로 맞추면 세 조건의 분포 차이가 줄어듭니다. 이 그림은 기존 0.1 V 하향 자료의 교차점에서 선형 보간한 평균장이므로, 2.05 V 추가 전압 조건을 반영한 0.05 V 문턱 표와 추출 자료가 다르고, 해당 보간 전압에서 수송을 새로 계산한 결과와도 구분합니다. 표시한 전도대는 z = 116–126 nm 창 평균의 정전기 성분입니다. 수직 양자 구속 에너지와 준페르미 준위까지 포함한 전체 밴드 구조나 엄밀한 주입 장벽 높이로 해석하지 않습니다.</p></section>
+
+<section id="validation" style="scroll-margin-top:90px"><h2 class="anchored">추가 계산으로 확인한 수송 안정성과 이력 의존성</h2><p>초기 결과의 종료 판정과 계산 이력에 대한 민감도를 확인하기 위해 세 전하 조건에서 22개 계산, 총 6,420,000 steps를 추가했습니다. N<sub>s</sub> = 10¹¹ cm⁻² 조건의 2.05 V 한 전압 조건, 대표 바이어스의 고정 길이 9개, 문턱 부근의 다른 호스트 난수열 3개, 상향 스윕 9개로 구성했습니다. 추가 전하를 다시 증가시키지 않고 저장된 입자·전위·온도에서 이어받았으며, 입자 100,000개·hard wall ON·자가발열 ON을 유지했습니다. 기존 결과와 원본 식별값이 바뀌지 않았음도 확인했습니다.</p><h3 class="anchored">종료 판정 뒤의 고정 길이 계산</h3><p>문턱 부근과 Vgs = 6 V, Vds = 8 V는 각각 320,000 steps, Vgs = 6 V, Vds = 0.1 V는 480,000 steps를 추가했습니다(1 fs 간격에서 320 ps, 480 ps). 중간 통과 여부와 무관하게 정한 길이를 모두 실행하고 전체 구간의 전류를 평균했습니다. 전반·후반을 겹치지 않는 두 구간으로 나눠 전류·온도·열수지·전위·정공 분포·Gate 채널 면밀도를 비교했습니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/validation-fixed.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="2137" height="665" src="images/gate-algan/validation-fixed.png" alt="기존 평균과 고정 길이 후속 평균의 비교"></a><figcaption class="figure-caption">Figure 12. 기존 평균과 고정 길이 후속 평균의 비교. 문턱 부근의 Vgs는 추가 전하가 없는 조건 2.00 V, N<sub>s</sub> = 10¹¹ cm⁻² 조건 2.10 V, N<sub>s</sub> = 10¹² cm⁻² 조건 2.65 V로 서로 다릅니다. 오차 막대는 각 시간 이력의 블록SEM이며, 표시 범위는 대표 바이어스에 한정합니다.</figcaption></figure><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">추가 전하</th>
+<th data-quarto-table-cell-role="th">바이어스 Vgs / Vds</th>
+<th data-quarto-table-cell-role="th">기존 전류</th>
+<th data-quarto-table-cell-role="th">추가 계산 평균 전류</th>
+<th data-quarto-table-cell-role="th">후속 − 기존</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>추가 전하 없음</td>
+<td>6 / 8 V</td>
+<td>488.840</td>
+<td>488.536 ± 0.174</td>
+<td>−0.304</td>
+</tr>
+<tr class="even">
+<td>추가 전하 없음</td>
+<td>6 / 0.1 V</td>
+<td>37.495</td>
+<td>37.690 ± 0.201</td>
+<td>+0.195</td>
+</tr>
+<tr class="odd">
+<td>추가 전하 없음</td>
+<td>2 / 0.5 V</td>
+<td>4.350</td>
+<td>4.270 ± 0.124</td>
+<td>−0.079</td>
+</tr>
+<tr class="even">
+<td>N<sub>s</sub> = 10¹¹ cm⁻²</td>
+<td>6 / 8 V</td>
+<td>477.712</td>
+<td>477.411 ± 0.169</td>
+<td>−0.301</td>
+</tr>
+<tr class="odd">
+<td>N<sub>s</sub> = 10¹¹ cm⁻²</td>
+<td>6 / 0.1 V</td>
+<td>36.617</td>
+<td>36.341 ± 0.194</td>
+<td>−0.275</td>
+</tr>
+<tr class="even">
+<td>N<sub>s</sub> = 10¹¹ cm⁻²</td>
+<td>2.1 / 0.5 V</td>
+<td>5.035</td>
+<td>5.069 ± 0.124</td>
+<td>+0.034</td>
+</tr>
+<tr class="odd">
+<td>N<sub>s</sub> = 10¹² cm⁻²</td>
+<td>6 / 8 V</td>
+<td>375.248</td>
+<td>375.252 ± 0.156</td>
+<td>+0.004</td>
+</tr>
+<tr class="even">
+<td>N<sub>s</sub> = 10¹² cm⁻²</td>
+<td>6 / 0.1 V</td>
+<td>30.447</td>
+<td>30.071 ± 0.185</td>
+<td>−0.375</td>
+</tr>
+<tr class="odd">
+<td>N<sub>s</sub> = 10¹² cm⁻²</td>
+<td>2.65 / 0.5 V</td>
+<td>5.708</td>
+<td>5.700 ± 0.093</td>
+<td>−0.008</td>
+</tr>
+</tbody>
+</table>
+</div><p>표의 전류 단위는 mA/mm이며 ±는 블록SEM입니다. 기존 평균과 후속 평균의 차이는 −0.375 – +0.195 mA/mm였고, 두 SEM의 제곱합 제곱근으로 나눈 차이의 최대값은 1.42였습니다. 이 비율은 시간 이력 사이의 상관과 Windows·Linux 실행 환경 차이를 포함한 전체 신뢰구간이나 정식 유의확률이 아니라 비교용 진단값입니다. 온도 평균의 기존 대비 변화는 최대 약 0.095 K였습니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/validation-trace.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1585" height="1259" src="images/gate-algan/validation-trace.png" alt="문턱 부근 고정 길이 계산의 20,000-step 블록 평균 이력"></a><figcaption class="figure-caption">Figure 13. 문턱 부근 고정 길이 계산의 연속 20,000-step 블록 평균. 곡선은 기호 사이의 PCHIP 표시이며 새 시간 분해능을 의미하지 않습니다. 수평선은 기존 평균과 추가 320,000-step 전체 평균입니다.</figcaption></figure><p>다른 난수열을 포함한 12개 고정 구간은 모두 선언한 전반·후반 판정 기준 안에 있었습니다. 최대 전류 차이는 0.458 mA/mm, 전위 RMS 차이는 3.33 mV, 정공 분포의 정규화 L1 차이는 0.0120이었습니다. 전류 허용치는 전반 평균의 1%와 0.5 mA/mm 중 큰 값이며, 온도 차이와 열수지 잔차는 각각 1 K 미만, 전위 RMS는 5 mV 미만, 정공 L1은 0.05 미만, Gate 면밀도 차이는 전반 평균의 1%와 10⁹ cm⁻² 중 큰 값 미만으로 판정했습니다. 특히 8 V 전류 허용치는 약 3.75–4.89 mA/mm이므로 통과 여부와 실제 차이를 함께 해석합니다. 저전압 후속 검증은 0.1 V 한 전압 조건이며 0.1·0.25·0.5 V의 저항 적합 전체를 다시 계산한 것은 아닙니다.</p><h3 class="anchored">문턱 부근 난수열과 스윕 방향</h3><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/validation-rng.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="1325" height="667" src="images/gate-algan/validation-rng.png" alt="호스트 난수열 변경 시 문턱 부근 평균 전류 차이"></a><figcaption class="figure-caption">Figure 14. 같은 저장 입자·전위·온도에서 호스트 난수열을 1801로 바꿨을 때 문턱 부근 평균 전류 차이. 오차 막대는 두 블록SEM의 제곱합 제곱근인 진단척도이며 독립 재현 실험의 신뢰구간이 아닙니다.</figcaption></figure><p>호스트 난수열 변경 후 전류 차이는 추가 전하가 없는 조건에서 −0.039, N<sub>s</sub> = 10¹¹ cm⁻² 조건 −0.146, N<sub>s</sub> = 10¹² cm⁻² 조건 +0.077 mA/mm였습니다. N<sub>s</sub> = 10¹¹ cm⁻² 조건 2.10 V에서 원래 난수 이력의 고정 평균은 5.069 ± 0.124, 다른 난수열은 4.923 ± 0.118 mA/mm로 5 mA/mm를 오갔습니다. 따라서 약 +0.08 V의 문턱 이동을 지지하지만 1 mV 이하의 정밀도를 주장하지 않습니다. 동일한 저장 물리 상태에서 출발한 비교이므로 독립적인 입자 초기분포 검증과는 구분합니다.</p><figure class="figure" style="display:block;margin:1.5rem 0"><a href="images/gate-algan/validation-sweep.png"><img class="img-fluid figure-img" style="width:100%;height:auto" loading="lazy" width="2138" height="665" src="images/gate-algan/validation-sweep.png" alt="Vds 0.5 V 문턱 부근 하향·상향 계산점 비교"></a><figcaption class="figure-caption">Figure 15. Vds = 0.5 V에서 문턱 부근의 하향·상향 계산점 비교. N<sub>s</sub> = 10¹¹ cm⁻² 조건의 하향 곡선에는 추가한 2.05 V 전압 조건을 포함했습니다. 곡선은 PCHIP, 기호는 실제 평균, 오차 막대는 블록SEM이며 문턱 추출에는 선형 보간을 사용했습니다.</figcaption></figure><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">추가 전하</th>
+<th data-quarto-table-cell-role="th">하향 V<sub>th</sub> (V)</th>
+<th data-quarto-table-cell-role="th">상향 V<sub>th</sub> (V)</th>
+<th data-quarto-table-cell-role="th">상향 − 하향 (mV)</th>
+<th data-quarto-table-cell-role="th">하향 / 상향 ΔV<sub>th</sub> (V)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>추가 전하 없음</td>
+<td>2.0177</td>
+<td>2.0175</td>
+<td>−0.19</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>N<sub>s</sub> = 10¹¹ cm⁻²</td>
+<td>2.0990</td>
+<td>2.1018</td>
+<td>+2.74</td>
+<td>+0.0813 / +0.0842</td>
+</tr>
+<tr class="odd">
+<td>N<sub>s</sub> = 10¹² cm⁻²</td>
+<td>2.6333</td>
+<td>2.6319</td>
+<td>−1.37</td>
+<td>+0.6156 / +0.6144</td>
+</tr>
+</tbody>
+</table>
+</div><p>상향 스윕은 추가 전하가 없는 조건 1.95·2.00·2.05 V, N<sub>s</sub> = 10¹¹ cm⁻² 조건 2.05·2.10·2.15 V, N<sub>s</sub> = 10¹² cm⁻² 조건 2.60·2.65·2.70 V의 세 전압 조건씩입니다. 개별 V<sub>th</sub>의 방향 차이는 −1.37 – +2.74 mV로 국소 블록SEM 전압 환산값 약 3–5 mV보다 작았습니다. 검사한 문턱 부근에서 뚜렷한 방향 차이는 관측하지 못했으나, 전체 0–6 V 왕복 특성이나 trapping 히스테리시스를 검증한 것은 아닙니다.</p></section>
+
+<section id="conclusion" style="scroll-margin-top:90px"><h2 class="anchored">결론, 해석 범위와 다음 연구</h2><p>현재 구조에서 Gate 아래 AlGaN에 지정한 음전하는 일정 전류 문턱을 높이고, 낮은 Drain 전압의 겉보기 저항을 증가시키며, 높은 Drain 전압의 전류를 감소시켰습니다. 기준 전류를 5–20 mA/mm로 바꾸어도 문턱 이동의 증가 방향은 유지됐습니다. N<sub>s</sub> = 10¹² cm⁻² 조건의 저항 증가율은 Vgs = 6 V에서 Vds = 0.10–0.25 V 구간 약 22.8%, 0.25–0.50 V 구간 약 27.4%로 달랐으므로, 문턱 이동과 저항 변화의 크기는 추출 조건과 함께 해석합니다.</p><p>이 계산은 이미 점유된 음전하의 위치와 양을 지정한 뒤 수송 응답을 구했습니다. 실험에서 어느 결함에 몇 개의 전자가 포획되는지, 스트레스 후 얼마 동안 머무는지는 별도의 관측량입니다. 블록 평균의 시간 표본 오차와 대표 조건의 난수열 비교는 소자 간 편차나 모델의 전체 불확실성과 구분해야 합니다.</p><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">검토 항목</th>
+<th data-quarto-table-cell-role="th">현재 확보한 근거</th>
+<th data-quarto-table-cell-role="th">남은 확인</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>전달·출력특성과 자가발열</td>
+<td>기존 90개 전압 조건 및 대표 조건의 고정 길이 후속 계산</td>
+<td>격자·입자 수 및 모든 출력특성 전압 조건의 독립 검증</td>
+</tr>
+<tr class="even">
+<td>문턱 추출 기준의 영향</td>
+<td>5–20 mA/mm 비교 및 N<sub>s</sub> = 10¹¹ cm⁻² 조건 2.05 V 추가 전압 조건</td>
+<td>기준 전류 2·3 mA/mm 비교는 이번 범위에서 제외</td>
+</tr>
+<tr class="odd">
+<td>문턱 부근의 정전기 해석</td>
+<td>같은 Gate 전압의 저장 분포와 같은 전류의 평균장 보간</td>
+<td>보간 전압에서 직접 계산한 상태와의 대조</td>
+</tr>
+<tr class="even">
+<td>계산 이력의 영향</td>
+<td>같은 저장 상태의 다른 난수열과 문턱 주변 상향 세 전압 조건 비교</td>
+<td>독립 초기분포·전체 왕복 스윕 검증</td>
+</tr>
+</tbody>
+</table>
+</div><p>추가 검증 후에도 N<sub>s</sub> = 10¹¹ cm⁻² 조건의 문턱 이동 약 +0.08 V, N<sub>s</sub> = 10¹² cm⁻² 조건의 약 +0.62 V라는 결론이 유지됐습니다. 검증한 추가 수송 길이는 수백 ps이며, μs 이상의 포획·방출 동역학이나 실험 trap의 종류·점유 시간은 검증하지 않았습니다.</p><p>다음 비교에서는 같은 등가 전하량을 Gate 계면과 SG·GD의 SiN/AlGaN 계면에 각각 배치해 위치별 ΔV<sub>th</sub>와 ΔR<sub>on</sub>을 함께 볼 수 있습니다. 위치별 길이가 다르면 같은 면밀도에서도 총전하가 달라지므로 두 양을 함께 기록해야 합니다. 이후 실험의 문턱 이동에 맞춘 전하량으로 ON 저항 변화까지 예측되는지 확인하면, 한 관측량에만 맞춘 해석보다 전하 위치 가설을 더 엄격하게 평가할 수 있습니다.</p></section>
+
+<section id="references" style="scroll-margin-top:90px"><h2 class="anchored">참고 문헌과 데이터</h2><p id="ref1">[1] <strong>G. Greco et al.</strong>, “Threshold voltage instability by charge trapping effects in the gate region of p-GaN HEMTs,” <em>Applied Physics Letters</em> 121, 233506 (2022). <a href="https://doi.org/10.1063/5.0122097">DOI: 10.1063/5.0122097</a> · <a href="https://arxiv.org/abs/2212.06442">공개 원문</a></p><p><strong>데이터.</strong> <a href="data/gate-algan/publication-comparison.csv">보완한 문턱과 주 비교 결과표</a> · <a href="data/gate-algan/charge-comparison.csv">보완 전 조건별 결과표</a> · <a href="data/gate-algan/voltage-points.csv">기존 90개 전압 조건의 전류와 오차</a> · <a href="data/gate-algan/reference-current-sensitivity.csv">기준 전류별 문턱과 보간 진단</a> · <a href="data/gate-algan/model-specification.json">층·입자·수송 모델 명세</a> · <a href="data/gate-algan/validation-points.csv">추가 계산 22건</a> · <a href="data/gate-algan/fixed-duration-validation.csv">고정 길이 검증</a> · <a href="data/gate-algan/sweep-direction-validation.csv">상향·하향 문턱 비교</a> · <a href="data/gate-algan/rng-validation.csv">다른 호스트 난수열 비교</a></p></section>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

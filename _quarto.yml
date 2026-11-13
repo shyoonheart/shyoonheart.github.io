@@ -21,6 +21,8 @@ website:
         menu:
           - href: fixed-charge.qmd
             text: Fixed Charge — 고정 음전하 민감도
+          - href: gate-algan-charge.qmd
+            text: Gate AlGaN Charge — 문턱·ON 저항
 
 format:
   html:

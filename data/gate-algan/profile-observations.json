@@ -1,0 +1,71 @@
+[
+  {
+    "mode": "same_Vgs_2p60",
+    "Ns_cm2": 0.0,
+    "Vgs": 2.6,
+    "Id_mA_mm": 43.21486323037086,
+    "source_points": [
+      "transfer_fine_Vg_2.60"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.22711570877484,
+    "gate_sheet_cm2": 482704749032.9551
+  },
+  {
+    "mode": "same_Vgs_2p60",
+    "Ns_cm2": 100000000000.0,
+    "Vgs": 2.6,
+    "Id_mA_mm": 37.61455997949626,
+    "source_points": [
+      "transfer_fine_Vg_2.60"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.23603691245695044,
+    "gate_sheet_cm2": 445982578747.87225
+  },
+  {
+    "mode": "same_Vgs_2p60",
+    "Ns_cm2": 1000000000000.0,
+    "Vgs": 2.6,
+    "Id_mA_mm": 3.5739651523158558,
+    "source_points": [
+      "transfer_fine_Vg_2.60"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.33444973061622296,
+    "gate_sheet_cm2": 170272684244.78256
+  },
+  {
+    "mode": "equal_current_5",
+    "Ns_cm2": 0.0,
+    "Vgs": 2.0165031216027587,
+    "Id_mA_mm": 5.0,
+    "source_points": [
+      "transfer_fine_Vg_2.00",
+      "transfer_fine_Vg_2.10"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.3167835606677165,
+    "gate_sheet_cm2": 254956037485.05475
+  },
+  {
+    "mode": "equal_current_5",
+    "Ns_cm2": 100000000000.0,
+    "Vgs": 2.100032532033901,
+    "Id_mA_mm": 5.0,
+    "source_points": [
+      "transfer_fine_Vg_2.10",
+      "transfer_fine_Vg_2.20"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.3121501036912148,
+    "gate_sheet_cm2": 246705580044.25522
+  },
+  {
+    "mode": "equal_current_5",
+    "Ns_cm2": 1000000000000.0,
+    "Vgs": 2.630517413343503,
+    "Id_mA_mm": 5.0,
+    "source_points": [
+      "transfer_fine_Vg_2.60",
+      "transfer_fine_Vg_2.70"
+    ],
+    "max_gate_Ec_relative_source_eV": 0.32575939189973435,
+    "gate_sheet_cm2": 184026703366.8014
+  }
+]
