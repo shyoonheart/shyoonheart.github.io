@@ -23,6 +23,8 @@ website:
             text: Fixed Charge — 고정 음전하 민감도
           - href: gate-algan-charge.qmd
             text: Gate AlGaN Charge — 문턱·ON 저항
+          - href: sg-gd-charge.qmd
+            text: SG·GD Interface Charge — 접근 영역 계면전하
 
 format:
   html:
