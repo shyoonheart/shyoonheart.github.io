@@ -22,6 +22,6 @@ resources:
 
 <section id="literature" style="scroll-margin-top:90px"><h2>실험 문헌과 해석 범위</h2><p id="ref1">[1] <strong>Danesin 등</strong>은 SiC 기판 HEMT의 고온 보관 실험에서 DC 문턱 이동을 관측하지 않았지만, 펄스 측정에서는 뚜렷한 전류 붕괴를 보고했고 이를 SG·GD 접근 영역 표면 트랩과 연결했습니다. 장시간 열화에서 DC 포화전류도 20% 감소해, DC 변화의 크기 자체는 이번 계산과 다릅니다. <a href="https://www.sciencedirect.com/science/article/abs/pii/S002627140800231X"><em>Microelectronics Reliability</em> (2008)</a></p><p id="ref2">[2] <strong>Wu 등</strong>의 p-GaN HEMT에서는 650 V, 10 ms 스트레스 후 동적/정적 ON 저항비가 기존 소자에서 4.30, GD 측 능동 패시베이션 소자에서 1.39였습니다. 이는 고전압 스트레스 후 측정 결과입니다. 이번 계산은 고정된 전하 분포 아래 최대 8 V의 준정적 응답을 다루므로 이 동적 저항비와 직접 비교할 수 없습니다. <a href="https://ieeexplore.ieee.org/document/9950512/"><em>IEEE Electron Device Letters</em></a></p><p id="ref3">[3] <strong>Catoggio 등</strong>의 RF HEMT 모델은 장벽/패시베이션 계면에 −2 × 10¹² cm⁻²의 고정전하를 적용했습니다. 전하 부호와 크기를 선정하는 참고 사례이며, 이번 SG·GD별 전류 변화율의 실험 검증은 아닙니다. <a href="https://www.mdpi.com/2079-9292/12/11/2457"><em>Electronics</em> (2023)</a></p></section>
 
-<section id="data" style="scroll-margin-top:90px"><h2>데이터</h2><p><a href="data/sg-gd/iv.csv">전압 조건별 전류와 블록 표준오차</a> · <a href="data/sg-gd/channel-profile.csv">채널 상대 에너지 분포 (meV, x = 592.3 nm 기준)</a></p></section>
+<section id="data" style="scroll-margin-top:90px"><h2>데이터</h2><p><a href="data/sg-gd/iv.csv">전압 조건별 전류와 블록 표준오차</a> · <a href="data/sg-gd/channel-profile.csv">채널 상대 에너지 분포 (meV, x = 592.3 nm 기준)</a></p><p>후속으로 전하량을 2×10¹²–10¹³ cm⁻²로 키운 비교는 <a href="sg-gd-dose.html">SG·GD Charge Dose</a>에 정리했습니다.</p></section>
 
 ```

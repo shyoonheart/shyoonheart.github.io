@@ -1,0 +1,80 @@
+[
+  {
+    "dose": "2e12",
+    "Vds": 0.1,
+    "I": 36.99892768201018,
+    "SEM": 0.245993342815179,
+    "T": 300.0740676013506,
+    "average_steps": 480000,
+    "field_samples": 240000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_2e12_20261126/output_Vg_6.00_Vd_0.10"
+  },
+  {
+    "dose": "2e12",
+    "Vds": 8.0,
+    "I": 488.19281843914,
+    "SEM": 0.2286900213590506,
+    "T": 378.11588094563615,
+    "average_steps": 160000,
+    "field_samples": 80000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_2e12_20261126/output_Vg_6.00_Vd_8.00"
+  },
+  {
+    "dose": "6e12",
+    "Vds": 0.1,
+    "I": 39.01026735542326,
+    "SEM": 0.2359497775284415,
+    "T": 300.0784652499428,
+    "average_steps": 480000,
+    "field_samples": 240000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_6e12_20261126/output_Vg_6.00_Vd_0.10"
+  },
+  {
+    "dose": "6e12",
+    "Vds": 8.0,
+    "I": 467.45987289453615,
+    "SEM": 0.2870722359790352,
+    "T": 374.7985623061725,
+    "average_steps": 160000,
+    "field_samples": 80000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_6e12_20261126/output_Vg_6.00_Vd_8.00"
+  },
+  {
+    "dose": "1e13",
+    "Vds": 0.1,
+    "I": 30.692875283505877,
+    "SEM": 0.1510604825387849,
+    "T": 300.06145435817126,
+    "average_steps": 480000,
+    "field_samples": 240000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_1e13_20261125/output_Vg_6.00_Vd_0.10"
+  },
+  {
+    "dose": "1e13",
+    "Vds": 8.0,
+    "I": 421.87329519611296,
+    "SEM": 0.19652178104748638,
+    "T": 367.50661358616117,
+    "average_steps": 160000,
+    "field_samples": 80000,
+    "electron_superparticles": 95675,
+    "sampled": 6000,
+    "sampling_seed": 260126,
+    "source": "/home/shyoonheart/HEMT/strict_sg_gd_1e13_20261125/output_Vg_6.00_Vd_8.00"
+  }
+]

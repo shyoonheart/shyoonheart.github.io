@@ -25,6 +25,8 @@ website:
             text: Gate AlGaN Charge — 문턱·ON 저항
           - href: sg-gd-charge.qmd
             text: SG·GD Interface Charge — 접근 영역 계면전하
+          - href: sg-gd-dose.qmd
+            text: SG·GD Charge Dose — 전하량 민감도
 
 format:
   html:
