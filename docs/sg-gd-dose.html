@@ -173,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
 
 <nav aria-label="SG·GD Charge Dose 목차"><p><a href="#key-results">핵심 결과</a> · <a href="#setup">조건과 전하량의 의미</a> · <a href="#band-basics">에너지 밴드 읽기</a> · <a href="#cloud">Monte Carlo 전자 구름</a> · <a href="#sheet">접근 영역 전자 밀도</a> · <a href="#accounting">빠진 전자의 행방</a> · <a href="#ec">전도대 변화의 분해</a> · <a href="#current">전류</a> · <a href="#scope">해석 범위와 다음 계산</a> · <a href="#references">참고 문헌과 데이터</a></p></nav>
 
-<section id="key-results" style="scroll-margin-top:90px"><h2 class="anchored">핵심 결과</h2><p><a href="sg-gd-charge.html">SG·GD Interface Charge</a>에서 10¹² cm⁻²로 보았던 SG·GD의 SiN/AlGaN 계면 고정 음전하를 2×10¹², 6×10¹², 10¹³ cm⁻²로 키우고, 에너지 밴드·시간 평균 전자 밀도·실제 Monte Carlo 입자 분포·전류를 함께 비교했습니다. 게시 전에 소자물리, 수치해석·통계, 문헌의 세 관점에서 검토를 거쳤고, 그 결과 원래 원고의 해석 일부를 바로잡았습니다.</p><ul><li><strong>접근 영역 고갈:</strong> 전하를 2×10¹²에서 10¹³ cm⁻²로 늘리면(추가 8×10¹² cm⁻²) SG·GD 채널의 전자 면밀도가 약 6–7×10¹² cm⁻² 줄어듭니다. 추가 전하의 78–88%를 2DEG가 받아내는 것으로, 정전기적으로 타당한 크기입니다.</li><li><strong>8 V 전류:</strong> 488.19 → 467.46 → 421.87 mA/mm로, 2×10¹² 대비 4.25%, 13.58% 감소합니다. 같은 온도라면 감소폭은 이보다 클 것으로 예상됩니다.</li><li><strong>모델 조건의 영향:</strong> 이동전자 총량을 고정했기 때문에 SG·GD에서 빠진 전자의 약 98%가 Source·Drain 접촉 아래로 옮겨 갔고, 접촉 아래 면밀도가 약 2배가 되었습니다. 실제 옴 접촉에서는 일어나지 않는 현상입니다.</li><li><strong>바로잡은 해석:</strong> 0.1 V에서 세 영역의 전도대가 약 0.3 eV 함께 오른 것은 소자 전체의 기준 전위 이동이며, 전하가 놓인 SG·GD 고유의 상승은 약 0.07–0.10 eV입니다. 0.1 V의 비단조 전류는 물리 현상으로 해석하지 않습니다.</li></ul><p>따라서 이 페이지의 정량값은 “전자 총량을 고정한 모델에서의 전하량 민감도”입니다. 전하 중성 접촉으로 다시 계산하기 전까지 실제 소자의 크기로 일반화하지 않습니다.</p></section>
+<section id="key-results" style="scroll-margin-top:90px"><h2 class="anchored">핵심 결과</h2><p><a href="sg-gd-charge.html">SG·GD Interface Charge</a>에서 10¹² cm⁻²로 보았던 SG·GD의 SiN/AlGaN 계면 고정 음전하를 2×10¹², 6×10¹², 10¹³ cm⁻²로 키우고, 에너지 밴드·시간 평균 전자 밀도·실제 Monte Carlo 입자 분포·전류를 함께 비교했습니다. 게시 전에 소자물리, 수치해석·통계, 문헌의 세 관점에서 검토를 거쳤고, 그 결과 원래 원고의 해석 일부를 바로잡았습니다.</p><ul><li><strong>접근 영역 고갈:</strong> 전하를 2×10¹²에서 10¹³ cm⁻²로 늘리면(추가 8×10¹² cm⁻²) SG·GD 채널의 전자 면밀도가 약 6–7×10¹² cm⁻² 줄어듭니다. 추가 전하의 78–88%를 2DEG가 받아내는 것으로, 정전기적으로 타당한 크기입니다.</li><li><strong>8 V 전류:</strong> 488.19 → 467.46 → 421.87 mA/mm로, 2×10¹² 대비 4.25%, 13.58% 감소합니다. 같은 온도라면 감소폭은 이보다 클 것으로 예상됩니다.</li><li><strong>모델 조건의 영향:</strong> 이동전자 총량을 고정했기 때문에 SG·GD에서 빠진 전자의 약 98%가 Source·Drain 접촉 아래로 옮겨 갔고, 접촉 아래 면밀도가 약 2배가 되었습니다. 실제 옴 접촉에서는 일어나지 않는 현상입니다.</li><li><strong>바로잡은 해석:</strong> 0.1 V에서 세 영역의 전도대가 약 0.3 eV 함께 오른 것은 소자 전체의 기준 전위 이동이며, 전하가 놓인 SG·GD 고유의 상승은 약 0.07–0.10 eV입니다. 0.1 V의 비단조 전류는 반복 계산에서 재현되지만, 모델 조건에 의존할 가능성이 커서 물리 현상으로 해석하지 않습니다.</li></ul><p>따라서 이 페이지의 정량값은 “전자 총량을 고정한 모델에서의 전하량 민감도”입니다. 전하 중성 접촉으로 다시 계산하기 전까지 실제 소자의 크기로 일반화하지 않습니다.</p></section>
 
 <section id="setup" style="scroll-margin-top:90px"><h2 class="anchored">계산 조건과 전하량의 의미</h2><div style="overflow-x:auto">
 <table class="table caption-top">
@@ -396,7 +396,78 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</div><p>단위는 mA/mm, Vgs = 6 V입니다. 0.25, 0.5, 8 V에서는 전하량이 늘수록 전류가 줄어듭니다. 8 V 전류는 2×10¹² 대비 4.25%, 13.58% 감소합니다.</p><h3 class="anchored">0.1 V의 비단조성</h3><p>0.1 V에서는 6×10¹² 조건(39.01)이 2×10¹² 조건(37.00)보다 높게 나타났습니다. 두 SEM을 합친 기준으로 5.9σ 차이입니다. 그런데 선형 영역 컨덕턴스 I/V를 보면 이상한 쪽은 2×10¹² 조건입니다.</p><div style="overflow-x:auto">
+</div><p>단위는 mA/mm, Vgs = 6 V입니다. 0.25, 0.5, 8 V에서는 전하량이 늘수록 전류가 줄어듭니다. 8 V 전류는 2×10¹² 대비 4.25%, 13.58% 감소합니다.</p><h3 class="anchored">0.1 V의 비단조성: 반복 계산으로 확인</h3><p>처음 계산에서는 0.1 V의 6×10¹² 조건(39.01 mA/mm)이 2×10¹² 조건(37.00)보다 높았습니다. 처음 계산은 난수 시드가 하나뿐이었고 버린 구간도 조건마다 달랐으므로, 모델은 그대로 두고 0.1 V를 다시 계산했습니다. 모든 반복에서 램프 뒤 200,000 steps를 버리고 480,000 steps를 고정 평균했으며, 결과를 보고 평균 구간을 옮기지 않았습니다. 시드별 GPU 난수열이 실제로 서로 다르다는 것과 블록 단위 전류 이력이 서로 상관되지 않는다는 것도 확인했습니다.</p><div style="overflow-x:auto">
+<table class="table caption-top">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">고정 음전하 (cm⁻²)</th>
+<th data-quarto-table-cell-role="th">계산</th>
+<th data-quarto-table-cell-role="th">전류 (mA/mm)</th>
+<th data-quarto-table-cell-role="th">블록 SEM</th>
+<th data-quarto-table-cell-role="th">전·후반 차이</th>
+<th data-quarto-table-cell-role="th">안정화·정밀도 진단</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2×10¹²</td>
+<td>저장 상태 · 801</td>
+<td>36.57</td>
+<td>0.24</td>
+<td>0.01</td>
+<td>통과</td>
+</tr>
+<tr class="even">
+<td>2×10¹²</td>
+<td>저장 상태 · 1801</td>
+<td>36.56</td>
+<td>0.19</td>
+<td>0.16</td>
+<td>통과</td>
+</tr>
+<tr class="odd">
+<td>2×10¹²</td>
+<td>저장 상태 · 2801</td>
+<td>36.57</td>
+<td>0.21</td>
+<td>0.12</td>
+<td>통과</td>
+</tr>
+<tr class="even">
+<td>2×10¹²</td>
+<td>0 V부터 독립 초기화 · 3801</td>
+<td>36.39</td>
+<td>0.22</td>
+<td>0.12</td>
+<td>통과</td>
+</tr>
+<tr class="odd">
+<td>6×10¹²</td>
+<td>저장 상태 · 1801</td>
+<td>38.85</td>
+<td>0.17</td>
+<td>0.40</td>
+<td>통과</td>
+</tr>
+<tr class="even">
+<td>6×10¹²</td>
+<td>저장 상태 · 2801</td>
+<td>38.81</td>
+<td>0.27</td>
+<td>0.58</td>
+<td>전류 차이·SEM 초과</td>
+</tr>
+<tr class="odd">
+<td>10¹³</td>
+<td>저장 상태 · 1801</td>
+<td>30.41</td>
+<td>0.17</td>
+<td>0.09</td>
+<td>전위 RMS 초과</td>
+</tr>
+</tbody>
+</table>
+</div><p>2×10¹² 조건은 시드 3개와 0 V부터의 독립 초기화 모두 36.4–36.6 mA/mm로, 6×10¹² 조건(38.8–38.9)보다 약 2.3 mA/mm 낮았습니다. 6×10¹²의 seed 2801은 미리 정한 기준(전·후반 차이 0.5 mA/mm, SEM 0.25 mA/mm)을 조금 넘었지만, 그 계산의 전반(39.10)·후반(38.52) 평균도 모두 2×10¹²보다 약 2 mA/mm 높습니다. 따라서 <strong>이 비단조성은 단일 계산의 통계적 이상치가 아니며, 차이의 방향은 재현됩니다.</strong> 엄격한 사전 기준으로는 6×10¹² 반복 하나가 진단을 통과하지 못했으므로, 차이의 크기는 약 2.3 ± 0.3 mA/mm 정도로만 봅니다.</p><div style="overflow-x:auto">
 <table class="table caption-top">
 <thead>
 <tr class="header">
@@ -409,25 +480,25 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>2×10¹²</td>
-<td>370</td>
-<td>393</td>
+<td>366</td>
+<td>395</td>
 <td>382</td>
 </tr>
 <tr class="even">
 <td>6×10¹²</td>
-<td>390</td>
+<td>388</td>
 <td>375</td>
 <td>353</td>
 </tr>
 <tr class="odd">
 <td>10¹³</td>
-<td>307</td>
+<td>304</td>
 <td>285</td>
 <td>267</td>
 </tr>
 </tbody>
 </table>
-</div><p>6×10¹²·10¹³ 조건은 Vds가 커질수록 컨덕턴스가 줄어드는데, 2×10¹² 조건만 0.1 V 값이 가장 낮습니다. 이 점을 약 395 mS/mm로 보면 0.1 V 전류는 약 39.5 mA/mm가 되어 단조 감소가 됩니다. 이 조건은 램프 뒤 20,000 steps만 버리고 평균했고, 모든 조건이 한 가지 난수 시드를 썼습니다. 따라서 <strong>0.1 V의 비단조성은 물리 현상으로 해석하지 않고</strong>, 독립 시드 재계산으로 확인할 대상으로 둡니다.</p><h3 class="anchored">전류 연속성과 자가발열</h3><p>GD 구간에서 따로 구한 전류는 보고 전류보다 전하량 순서로 약 0.07, 0.33, 0.80 mA/mm 낮으며, 바이어스와 무관합니다. 10¹³ cm⁻²에서는 이 차이가 블록 SEM보다 큽니다(0.1 V에서 2.6%).</p><p>8 V의 소자 온도는 열저항 모델(300 K + R<sub>th</sub>·P)로 378.12, 374.80, 367.51 K입니다. 전하량이 클수록 소비전력과 온도가 낮아지므로, 자가발열은 전류 감소를 키운 것이 아니라 일부 상쇄했습니다. 이동도가 T<sup>−1.5</sup>에 비례한다고 보면 약 4%에 해당하므로, 같은 온도에서의 전기적 감소폭은 13.6%보다 클 것으로 예상됩니다. 일괄 온도 모델이라 국소 발열점 효과는 포함하지 않았습니다 <a href="#ref8">[8]</a>.</p></section>
+</div><p>반복 계산의 평균으로 다시 구한 컨덕턴스입니다(0.5 V와 10¹³의 0.25 V는 처음 계산 값). 2×10¹² 조건만 0.1 V 컨덕턴스가 0.25 V보다 낮은 현상도 반복해서 나타났습니다. 처음 원고에서는 이 점을 2×10¹² 조건의 이상치로 보았으나, 반복 계산으로 그 가설은 맞지 않는 것으로 확인됐습니다.</p><p>가장 유력한 원인은 <a href="#accounting">전자 총량 고정</a>입니다. 0.1 V 선형 영역의 전류는 접촉 아래·접근 영역·Gate 채널 저항의 직렬 합으로 정해지는데, 전하량이 커지면 접근 영역은 고갈되지만 빠진 전자가 접촉 아래에 쌓여 그쪽 저항은 줄어듭니다. 두 효과가 경쟁하면 비단조 응답이 나올 수 있습니다. 이는 아직 검증하지 않은 가설이므로, <strong>0.1 V 비단조성을 실제 소자의 물리 현상으로 해석하지 않습니다.</strong></p><h3 class="anchored">전류 연속성과 자가발열</h3><p>GD 구간에서 따로 구한 전류는 보고 전류보다 전하량 순서로 약 0.07, 0.33, 0.80 mA/mm 낮으며, 바이어스와 무관합니다. 10¹³ cm⁻²에서는 이 차이가 블록 SEM보다 큽니다(0.1 V에서 2.6%).</p><p>8 V의 소자 온도는 열저항 모델(300 K + R<sub>th</sub>·P)로 378.12, 374.80, 367.51 K입니다. 전하량이 클수록 소비전력과 온도가 낮아지므로, 자가발열은 전류 감소를 키운 것이 아니라 일부 상쇄했습니다. 이동도가 T<sup>−1.5</sup>에 비례한다고 보면 약 4%에 해당하므로, 같은 온도에서의 전기적 감소폭은 13.6%보다 클 것으로 예상됩니다. 일괄 온도 모델이라 국소 발열점 효과는 포함하지 않았습니다 <a href="#ref8">[8]</a>.</p></section>
 
 <section id="scope" style="scroll-margin-top:90px"><h2 class="anchored">해석 범위와 다음 계산</h2><div style="overflow-x:auto">
 <table class="table caption-top">
@@ -461,14 +532,14 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>0.1 V 비단조 전류</td>
-<td>미확인</td>
-<td>단일 시드; 2×10¹² 조건의 0.1 V 점이 이상치일 가능성</td>
+<td>방향은 재현됨, 원인 미확인</td>
+<td>시드 3개와 독립 초기화로 재현; 전자 총량 고정의 영향 가능성</td>
 </tr>
 </tbody>
 </table>
-</div><p>이 계산은 지정한 고정 음전하량에 대한 준정적 Monte Carlo 응답이며, 포획·방출 시간상수나 실제 공정의 전하 생성량은 다루지 않습니다. 전위·밀도 그림은 최종 전류 평균 구간의 저장 블록(각 2,000-step 블록의 후반 1,000 step)을 평균했고, 전자 구름은 최종 체크포인트의 한 시점입니다.</p><p>다음 계산에서는 <strong>접촉에서 전자가 들어오고 나갈 수 있는 전하 중성 경계</strong>로 같은 비교를 다시 하고, 0.1 V 조건을 독립 시드로 반복할 계획입니다. 그때 이 페이지의 전류 감소율과 E<sub>c</sub> 이동을 갱신합니다.</p></section>
+</div><p>이 계산은 지정한 고정 음전하량에 대한 준정적 Monte Carlo 응답이며, 포획·방출 시간상수나 실제 공정의 전하 생성량은 다루지 않습니다. 전위·밀도 그림은 최종 전류 평균 구간의 저장 블록(각 2,000-step 블록의 후반 1,000 step)을 평균했고, 전자 구름은 최종 체크포인트의 한 시점입니다.</p><p>다음 계산에서는 <strong>접촉에서 전자가 들어오고 나갈 수 있는 전하 중성 경계</strong>로 같은 비교를 다시 할 계획입니다. 0.1 V의 반복 계산은 마쳤으며 결과를 위에 반영했습니다. 그때 이 페이지의 전류 감소율과 E<sub>c</sub> 이동을 갱신합니다.</p></section>
 
-<section id="references" style="scroll-margin-top:90px"><h2 class="anchored">참고 문헌과 데이터</h2><p id="ref1">[1] J. P. Ibbetson, P. T. Fini, K. D. Ness, S. P. DenBaars, J. S. Speck, U. K. Mishra, “Polarization effects, surface states, and the source of electrons in AlGaN/GaN heterostructure field effect transistors,” <em>Appl. Phys. Lett.</em> 77, 250 (2000). <a href="https://doi.org/10.1063/1.126940">DOI: 10.1063/1.126940</a></p><p id="ref2">[2] O. Ambacher et al., “Two-dimensional electron gases induced by spontaneous and piezoelectric polarization charges in N- and Ga-face AlGaN/GaN heterostructures,” <em>J. Appl. Phys.</em> 85, 3222 (1999). <a href="https://doi.org/10.1063/1.369664">DOI: 10.1063/1.369664</a></p><p id="ref3">[3] O. Ambacher et al., “Two dimensional electron gases induced by spontaneous and piezoelectric polarization in undoped and doped AlGaN/GaN heterostructures,” <em>J. Appl. Phys.</em> 87, 334 (2000). <a href="https://doi.org/10.1063/1.371866">DOI: 10.1063/1.371866</a></p><p id="ref4">[4] R. Vetury, N. Q. Zhang, S. Keller, U. K. Mishra, “The impact of surface states on the DC and RF characteristics of AlGaN/GaN HFETs,” <em>IEEE Trans. Electron Devices</em> 48, 560 (2001). <a href="https://doi.org/10.1109/16.906451">DOI: 10.1109/16.906451</a></p><p id="ref5">[5] M. Fagerlind et al., “Investigation of the interface between silicon nitride passivations and AlGaN/AlN/GaN heterostructures by C(V) characterization of metal-insulator-semiconductor-heterostructure capacitors,” <em>J. Appl. Phys.</em> 108, 014508 (2010). <a href="https://doi.org/10.1063/1.3428442">DOI: 10.1063/1.3428442</a></p><p id="ref6">[6] E. Catoggio, S. Donati Guerrieri, F. Bonani, “TCAD Modeling of GaN HEMT Output Admittance Dispersion through Trap Rate Equation Green’s Functions,” <em>Electronics</em> 12(11), 2457 (2023). <a href="https://doi.org/10.3390/electronics12112457">DOI: 10.3390/electronics12112457</a></p><p id="ref7">[7] C. Jacoboni, L. Reggiani, “The Monte Carlo method for the solution of charge transport in semiconductors with applications to covalent materials,” <em>Rev. Mod. Phys.</em> 55, 645 (1983). <a href="https://doi.org/10.1103/RevModPhys.55.645">DOI: 10.1103/RevModPhys.55.645</a></p><p id="ref8">[8] B. Padmanabhan, D. Vasileska, S. M. Goodnick, “Is self-heating responsible for the current collapse in GaN HEMTs?,” <em>J. Comput. Electron.</em> 11, 129 (2012). <a href="https://doi.org/10.1007/s10825-012-0385-z">DOI: 10.1007/s10825-012-0385-z</a></p><p id="ref9">[9] C. Hu, <em>Modern Semiconductor Devices for Integrated Circuits</em>, Pearson (2010), Ch. 2. <a href="https://www.chu.berkeley.edu/wp-content/uploads/2020/01/Chenming-Hu_ch2-2.pdf">저자 공개 원고</a></p><p>[1]–[3]은 분극과 표면 상태의 배경, [4]는 가상 게이트와의 비교, [5]·[6]은 전하량 범위, [7]은 Monte Carlo 방법, [8]은 자가발열, [9]는 밴드 해석에 사용했습니다. 어느 문헌도 이 계산의 수치를 검증한 것은 아닙니다.</p><p><strong>데이터.</strong> <a href="data/sg-gd-dose/current-results.json">전압 조건별 전류·SEM·온도</a> · <a href="data/sg-gd-dose/region-metrics.json">영역별 면밀도·전위</a> · <a href="data/sg-gd-dose/summary.json">필드·입자 표본 정보</a> · <a href="data/sg-gd-dose/band-profiles.zip">성장 방향 밴드 CSV 18개</a></p></section>
+<section id="references" style="scroll-margin-top:90px"><h2 class="anchored">참고 문헌과 데이터</h2><p id="ref1">[1] J. P. Ibbetson, P. T. Fini, K. D. Ness, S. P. DenBaars, J. S. Speck, U. K. Mishra, “Polarization effects, surface states, and the source of electrons in AlGaN/GaN heterostructure field effect transistors,” <em>Appl. Phys. Lett.</em> 77, 250 (2000). <a href="https://doi.org/10.1063/1.126940">DOI: 10.1063/1.126940</a></p><p id="ref2">[2] O. Ambacher et al., “Two-dimensional electron gases induced by spontaneous and piezoelectric polarization charges in N- and Ga-face AlGaN/GaN heterostructures,” <em>J. Appl. Phys.</em> 85, 3222 (1999). <a href="https://doi.org/10.1063/1.369664">DOI: 10.1063/1.369664</a></p><p id="ref3">[3] O. Ambacher et al., “Two dimensional electron gases induced by spontaneous and piezoelectric polarization in undoped and doped AlGaN/GaN heterostructures,” <em>J. Appl. Phys.</em> 87, 334 (2000). <a href="https://doi.org/10.1063/1.371866">DOI: 10.1063/1.371866</a></p><p id="ref4">[4] R. Vetury, N. Q. Zhang, S. Keller, U. K. Mishra, “The impact of surface states on the DC and RF characteristics of AlGaN/GaN HFETs,” <em>IEEE Trans. Electron Devices</em> 48, 560 (2001). <a href="https://doi.org/10.1109/16.906451">DOI: 10.1109/16.906451</a></p><p id="ref5">[5] M. Fagerlind et al., “Investigation of the interface between silicon nitride passivations and AlGaN/AlN/GaN heterostructures by C(V) characterization of metal-insulator-semiconductor-heterostructure capacitors,” <em>J. Appl. Phys.</em> 108, 014508 (2010). <a href="https://doi.org/10.1063/1.3428442">DOI: 10.1063/1.3428442</a></p><p id="ref6">[6] E. Catoggio, S. Donati Guerrieri, F. Bonani, “TCAD Modeling of GaN HEMT Output Admittance Dispersion through Trap Rate Equation Green’s Functions,” <em>Electronics</em> 12(11), 2457 (2023). <a href="https://doi.org/10.3390/electronics12112457">DOI: 10.3390/electronics12112457</a></p><p id="ref7">[7] C. Jacoboni, L. Reggiani, “The Monte Carlo method for the solution of charge transport in semiconductors with applications to covalent materials,” <em>Rev. Mod. Phys.</em> 55, 645 (1983). <a href="https://doi.org/10.1103/RevModPhys.55.645">DOI: 10.1103/RevModPhys.55.645</a></p><p id="ref8">[8] B. Padmanabhan, D. Vasileska, S. M. Goodnick, “Is self-heating responsible for the current collapse in GaN HEMTs?,” <em>J. Comput. Electron.</em> 11, 129 (2012). <a href="https://doi.org/10.1007/s10825-012-0385-z">DOI: 10.1007/s10825-012-0385-z</a></p><p id="ref9">[9] C. Hu, <em>Modern Semiconductor Devices for Integrated Circuits</em>, Pearson (2010), Ch. 2. <a href="https://www.chu.berkeley.edu/wp-content/uploads/2020/01/Chenming-Hu_ch2-2.pdf">저자 공개 원고</a></p><p>[1]–[3]은 분극과 표면 상태의 배경, [4]는 가상 게이트와의 비교, [5]·[6]은 전하량 범위, [7]은 Monte Carlo 방법, [8]은 자가발열, [9]는 밴드 해석에 사용했습니다. 어느 문헌도 이 계산의 수치를 검증한 것은 아닙니다.</p><p><strong>데이터.</strong> <a href="data/sg-gd-dose/current-results.json">전압 조건별 전류·SEM·온도</a> · <a href="data/sg-gd-dose/region-metrics.json">영역별 면밀도·전위</a> · <a href="data/sg-gd-dose/summary.json">필드·입자 표본 정보</a> · <a href="data/sg-gd-dose/band-profiles.zip">성장 방향 밴드 CSV 18개</a> · <a href="data/sg-gd-dose/low-bias-repeats.csv">0.1·0.25 V 반복 계산</a> · <a href="data/sg-gd-dose/low-bias-diagnostics.csv">반복 계산의 안정화 진단</a></p></section>
 
 
 
